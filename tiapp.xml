@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-oauth-secret-production" type="string">1osyTA3TxuwW3VazT0eRJPiJ7NzVhdmS</property>
+    <property name="acs-oauth-key-production" type="string">3Sxr6P7fjJkxziqSR4h7t54I3DTSN8vq</property>
+    <property name="acs-api-key-production" type="string">ZyYTX3kzImwFVh7vX340HILUoGd6FUmm</property>
+    <property name="acs-oauth-secret-development" type="string">07FSMKefUjnl3tAxXoTmWWoB6XkDrmrZ</property>
+    <property name="acs-oauth-key-development" type="string">tNDSd1EUI6CyLbC3YM72THNUZwJQVdT5</property>
+    <property name="acs-api-key-development" type="string">vpXsJRdIu7p13cxgejOFQVPQSeBw7BaB</property>
     <deployment-targets>
         <target device="mobileweb">false</target>
         <target device="iphone">true</target>
@@ -8,13 +14,13 @@
         <target device="blackberry">false</target>
     </deployment-targets>
     <sdk-version>2.1.3.GA</sdk-version>
-    <id>com.veladia.testing2</id>
-    <name>feelKidRadio</name>
+    <id>com.companyname.appname</id>
+    <name>iFeelKid</name>
     <version>1.0</version>
-    <publisher>jace</publisher>
+    <publisher>velerofont</publisher>
     <url>http://</url>
     <description>not specified</description>
-    <copyright>2013 by jace</copyright>
+    <copyright>2013 by velerofont</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
@@ -23,12 +29,12 @@
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
-    <guid>84fad5b7-9376-4024-ab0f-7bbacc158d80</guid>
+    <guid>2115470c-c293-4d42-bb09-0ff8632fa1da</guid>
     <property name="ti.ui.defaultunit">system</property>
     <iphone>
     	<backgroundModes>
-      		<mode>audio</mode>
-  		</backgroundModes>
+    		<mode>audio</mode>
+    	</backgroundModes>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
         </orientations>
@@ -48,5 +54,7 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
-    <modules/>
+    <modules>
+        <module platform="commonjs" version="2.3.1">ti.cloud</module>
+    </modules>
 </ti:app>

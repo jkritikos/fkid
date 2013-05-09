@@ -1,0 +1,6 @@
+dependencies: \
+  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/JSON/SBJSON.m \
+  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/JSON/SBJSON.h \
+  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/JSON/SBJsonParser.h \
+  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/JSON/SBJsonBase.h \
+  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/JSON/SBJsonWriter.h

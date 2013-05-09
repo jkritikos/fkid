@@ -1,0 +1,1 @@
+/Users/velerofont/Desktop/iFeelKid/Resources/game/iphone/cards.js
