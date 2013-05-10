@@ -1,3 +1,4 @@
+//cards view
 var viewCards = Ti.UI.createView({
 	backgroundImage:IMAGE_PATH+'card/background_B.jpg',
 	bottom:65
@@ -5,6 +6,7 @@ var viewCards = Ti.UI.createView({
 
 win.add(viewCards);
 
+//title popup
 var titleCardPopup = Ti.UI.createImageView({
 	image:IMAGE_PATH+'card/title_card.png',
 	top:0
@@ -12,6 +14,7 @@ var titleCardPopup = Ti.UI.createImageView({
 
 viewCards.add(titleCardPopup);
 
+//title label in the popup
 var titleCardLabel = Ti.UI.createLabel({
 	text:'Ήξερες ότι..',
 	color:'3bb3e6',
@@ -22,13 +25,15 @@ var titleCardLabel = Ti.UI.createLabel({
 });
 titleCardPopup.add(titleCardLabel);
 
+//card
 var cardImage = Ti.UI.createImageView({
 	image:IMAGE_PATH+'card/card.png',
-	top:70
+	top:80
 });
 
 viewCards.add(cardImage);
 
+//coming soon image
 var comingSoonImage = Ti.UI.createImageView({
 	image:IMAGE_PATH+'card/comingsoon.png',
 	top:55,

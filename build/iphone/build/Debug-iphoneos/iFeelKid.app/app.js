@@ -1,1 +1,1 @@
-/Users/velerofont/Desktop/iFeelKid/Resources/app.js
+/Users/velerofont/Desktop/fkid/Resources/app.js

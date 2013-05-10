@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/SCListener.m \
-  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/SCListener.h
+  /Users/velerofont/Desktop/fkid/build/iphone/Classes/SCListener.m \
+  /Users/velerofont/Desktop/fkid/build/iphone/Classes/SCListener.h

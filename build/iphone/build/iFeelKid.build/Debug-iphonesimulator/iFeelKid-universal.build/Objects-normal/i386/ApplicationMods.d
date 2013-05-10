@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/ApplicationMods.m \
-  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/ApplicationMods.h
+  /Users/velerofont/Desktop/fkid/build/iphone/Classes/ApplicationMods.m \
+  /Users/velerofont/Desktop/fkid/build/iphone/Classes/ApplicationMods.h

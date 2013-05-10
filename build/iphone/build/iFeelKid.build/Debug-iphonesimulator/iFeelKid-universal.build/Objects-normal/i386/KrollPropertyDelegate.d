@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/KrollPropertyDelegate.m \
-  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/KrollPropertyDelegate.h
+  /Users/velerofont/Desktop/fkid/build/iphone/Classes/KrollPropertyDelegate.m \
+  /Users/velerofont/Desktop/fkid/build/iphone/Classes/KrollPropertyDelegate.h

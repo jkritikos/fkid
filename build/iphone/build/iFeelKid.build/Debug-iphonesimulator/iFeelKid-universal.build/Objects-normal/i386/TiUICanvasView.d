@@ -1,2 +1,2 @@
 dependencies: \
-  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/TiUICanvasView.m
+  /Users/velerofont/Desktop/fkid/build/iphone/Classes/TiUICanvasView.m

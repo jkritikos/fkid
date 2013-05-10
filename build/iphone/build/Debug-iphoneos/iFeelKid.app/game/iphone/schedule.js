@@ -1,1 +1,1 @@
-/Users/velerofont/Desktop/iFeelKid/Resources/game/iphone/schedule.js
+/Users/velerofont/Desktop/fkid/Resources/game/iphone/schedule.js

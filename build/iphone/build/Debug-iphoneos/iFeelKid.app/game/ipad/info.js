@@ -1,1 +1,1 @@
-/Users/velerofont/Desktop/iFeelKid/Resources/game/ipad/info.js
+/Users/velerofont/Desktop/fkid/Resources/game/ipad/info.js

@@ -1,1 +1,1 @@
-dependencies: /Users/velerofont/Desktop/iFeelKid/build/iphone/main.m
+dependencies: /Users/velerofont/Desktop/fkid/build/iphone/main.m

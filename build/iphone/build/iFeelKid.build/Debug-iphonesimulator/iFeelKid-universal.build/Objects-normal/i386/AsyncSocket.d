@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/AsyncSocket.m \
-  /Users/velerofont/Desktop/iFeelKid/build/iphone/Classes/AsyncSocket.h
+  /Users/velerofont/Desktop/fkid/build/iphone/Classes/AsyncSocket.m \
+  /Users/velerofont/Desktop/fkid/build/iphone/Classes/AsyncSocket.h
