@@ -16,7 +16,7 @@ var viewPlayer = Ti.UI.createView({
 //play button
 var playerPlayButton = Ti.UI.createButton({
 	backgroundImage:IMAGE_PATH+'player/play.png',
-	top:330,
+	top:340,
 	width:364,
 	height:364,
 	active:false
@@ -47,16 +47,16 @@ infoButton.addEventListener('click', handleInfoButton);
 if(!Titanium.Network.online){
 	var noInternetBar = Ti.UI.createImageView({
 		image:IMAGE_PATH+'player/error_bar.png',
-		bottom:35
+		bottom:55
 	});
 	viewPlayer.add(noInternetBar);
 	
 	var noInternetLabel = Ti.UI.createLabel({
 		text:'Φαίνεται να μην είσαι συνδεδεμένος στο Internet.. Συνδέσου και δοκίμασε ξανά!',
 		color:'white',
-		width:280,
+		width:600,
 		textAlign:'center',
-		font:{fontSize:13, fontFamily:'Helvetica'}
+		font:{fontSize:24, fontFamily:'Helvetica'}
 	});
 	noInternetBar.add(noInternetLabel);
 }
