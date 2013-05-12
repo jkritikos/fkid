@@ -10,13 +10,30 @@ if(isIpad){
 	TYPE_PATH = 'game/ipad/';
 }
 
+//Fade in animation
+var anim_in = Titanium.UI.createAnimation();
+anim_in.opacity=1;
+anim_in.duration = 400;
+
+//Fade out animation
+var anim_out = Titanium.UI.createAnimation();
+anim_out.opacity=0;
+anim_out.duration = 400;
+
 //create window
 var win = Titanium.UI.createWindow({
 	fullscreen:true
 });
 
-//include player.js as a startup view
+//included all files 
+Ti.include('game/dao.js');
+
+Ti.include(TYPE_PATH+'cards.js');
+Ti.include(TYPE_PATH+'schedule.js');
 Ti.include(TYPE_PATH+'player.js');
+Ti.include(TYPE_PATH+'info.js');
+
+viewPlayer.animate(anim_in);
 
 //tab bar
 var tabBar = Ti.UI.createImageView({
@@ -27,11 +44,11 @@ win.add(tabBar);
 
 //player tab
 var playerTab = Ti.UI.createButton({
-	backgroundImage:IMAGE_PATH+'player/tab_radio_select.png',
+	backgroundImage:IMAGE_PATH+'player/tab_radio.png',
 	zIndex:4,
-	width:isIpad ? 231 : 100,
-	height:isIpad ? 182 : 80,
-	bottom:0
+	width:isIpad ? 141 : 61,
+	height:isIpad ? 103 : 45,
+	bottom:isIpad ? 20 : 8
 });
 win.add(playerTab);
 playerTab.addEventListener('click', handlePlayerTab);	
@@ -60,65 +77,102 @@ var cardsTab = Ti.UI.createButton({
 win.add(cardsTab);
 cardsTab.addEventListener('click', handleCardsTab);	
 
+//player tab selected
+var playerTabSelected = Ti.UI.createButton({
+	backgroundImage:IMAGE_PATH+'player/tab_selection.png',
+	zIndex:3,
+	width:isIpad ? 231 : 100,
+	height:isIpad ? 182 : 80,
+	bottom:0
+});
+win.add(playerTabSelected);
+playerTabSelected.show();
+playerTabSelected.addEventListener('click', handlePlayerTab);	
+
+//schedule tab selected
+var scheduleTabSelected = Ti.UI.createButton({
+	backgroundImage:IMAGE_PATH+'player/tab_selection.png',
+	left:isIpad ? 9 : 3,
+	zIndex:3,
+	width:isIpad ? 231 : 100,
+	height:isIpad ? 182 : 80,
+	bottom:0
+});
+win.add(scheduleTabSelected);
+scheduleTabSelected.hide();
+scheduleTabSelected.addEventListener('click', handleScheduleTab);	
+
+//cards tab selected
+var cardsTabSelected = Ti.UI.createButton({
+	backgroundImage:IMAGE_PATH+'player/tab_selection.png',
+	right:isIpad ? 9 : 3,
+	width:isIpad ? 231 : 100,
+	height:isIpad ? 182 : 80,
+	zIndex:3,
+	bottom:0
+});
+win.add(cardsTabSelected);
+cardsTabSelected.hide();
+cardsTabSelected.addEventListener('click', handleCardsTab);
+
 win.open();
 
 //Event functions for tabs
 function handleCardsTab(){
-		//change image, position, and dimensions to selected image
-		cardsTab.backgroundImage = IMAGE_PATH+'player/tab_heart_select.png';
-		cardsTab.bottom = 0;
-		cardsTab.right = isIpad ? 9 : 3;
-		cardsTab.width = isIpad ? 231 : 100;
-		cardsTab.height = isIpad ? 182 : 80;
-		//change image, position, and dimensions to unselected image
-		unselectPlayerTab();
-		unselectScheduleTab();
-		Ti.include(TYPE_PATH+'cards.js');
+		//hide and show accordingly tabs
+		cardsTabSelected.show();
+		scheduleTabSelected.hide();
+		playerTabSelected.hide();
+		
+		//as long as there is an Internet connection, create another view
+		if(Titanium.Network.online == true){
+			Ti.include(TYPE_PATH+'cards.js');
+		}
+		
+		//animate in corresponding view and animate out other views 
+		viewPlayer.animate(anim_out);
+		viewSchedule.animate(anim_out);
+		viewCards.animate(anim_in);
+		viewInfo.animate(anim_out);
+		
+		//change the zIndex of viewPlayer who is a constant view
+		viewPlayer.zIndex = 0;
+		
+		//stop bars Loading
+		barsLoading(stop);
+		//remove no internet error if user opens internet while app is open
+		disablePlayerNoInternet();
 }
 
 function handleScheduleTab(){
-		scheduleTab.backgroundImage = IMAGE_PATH+'player/tab_program_select.png';
-		scheduleTab.bottom = 0;
-		scheduleTab.left = isIpad ? 9 : 3;
-		scheduleTab.width = isIpad ? 231 : 100;
-		scheduleTab.height = isIpad ? 182 : 80;
-		unselectPlayerTab();
-		unselectCardsTab();
-		Ti.include(TYPE_PATH+'schedule.js');
+		cardsTabSelected.hide();
+		scheduleTabSelected.show();
+		playerTabSelected.hide();
+		
+		if(Titanium.Network.online == true){
+			Ti.include(TYPE_PATH+'schedule.js');
+		}
+		viewPlayer.animate(anim_out);
+		viewSchedule.animate(anim_in);
+		viewCards.animate(anim_out);
+		viewInfo.animate(anim_out);
+		
+		viewPlayer.zIndex = 0;
+		disablePlayerNoInternet();
 }
 
 function handlePlayerTab(){
-		playerTab.backgroundImage = IMAGE_PATH+'player/tab_radio_select.png';
-		playerTab.bottom = 0;
-		playerTab.width = isIpad ? 231 : 100;
-		playerTab.height = isIpad ? 182 : 80;
-		unselectScheduleTab();
-		unselectCardsTab();
-		Ti.include(TYPE_PATH+'player.js');
-}
-
-
-//unselect tab
-function unselectPlayerTab(){
-	//change image, position, and dimensions to unselected image
-	playerTab.backgroundImage = IMAGE_PATH+'player/tab_radio.png';
-	playerTab.bottom = isIpad ? 20 : 8;
-	playerTab.width = isIpad ? 141 : 61;
-	playerTab.height = isIpad ? 103 : 45;
-}
-
-function unselectScheduleTab(){
-	scheduleTab.backgroundImage = IMAGE_PATH+'player/tab_program.png';
-	scheduleTab.bottom = isIpad ? 20 : 8;
-	scheduleTab.left = isIpad ? 54 : 23;
-	scheduleTab.width = isIpad ? 138 : 59;
-	scheduleTab.height = isIpad ? 101 : 44;
-}
-
-function unselectCardsTab(){
-	cardsTab.backgroundImage = IMAGE_PATH+'player/tab_heart.png';
-	cardsTab.bottom = isIpad ? 20 : 8;
-	cardsTab.right = isIpad ? 64 : 28;
-	cardsTab.width = isIpad ? 120 : 52;
-	cardsTab.height = isIpad ? 105 : 46;
+		cardsTabSelected.hide();
+		scheduleTabSelected.hide();
+		playerTabSelected.show();
+		
+		viewPlayer.animate(anim_in);
+		viewSchedule.animate(anim_out);
+		viewCards.animate(anim_out);
+		viewInfo.animate(anim_out);
+		
+		//increase the zIndex to show viewPlayer
+		viewPlayer.zIndex = 2;
+		barsLoading(stop);
+		disablePlayerNoInternet();
 }

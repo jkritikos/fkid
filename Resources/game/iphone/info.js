@@ -1,10 +1,11 @@
 //unselect player tab when info view is opened
-unselectPlayerTab();
+viewPlayer.zIndex = 0;
 
 //info view
 var viewInfo = Ti.UI.createView({
 	backgroundImage:IMAGE_PATH+'info/background_C.jpg',
-	bottom:65
+	bottom:65,
+	opacity:0
 });
 win.add(viewInfo);
 

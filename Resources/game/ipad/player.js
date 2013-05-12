@@ -61,6 +61,12 @@ if(!Titanium.Network.online){
 	noInternetBar.add(noInternetLabel);
 }
 
+var activityIndicator = Ti.UI.createActivityIndicator({
+	style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
+});
+playerPlayButton.add(activityIndicator);
+activityIndicator.hide();
+
 win.add(viewPlayer);
 
 //handles the play button
@@ -70,9 +76,15 @@ function playButton(){
         playerPlayButton.active = false; 
         playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
     }else{
-        audioPlayer.start();
-        playerPlayButton.active = true;
-        playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
+    	playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
+    	activityIndicator.show();
+    	setTimeout(function(){
+    		activityIndicator.hide();
+    		audioPlayer.start();
+        	playerPlayButton.active = true;
+        	playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
+    	}, 3000);
+        
     }
 		
 }

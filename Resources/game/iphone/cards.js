@@ -1,7 +1,8 @@
 //cards view
 var viewCards = Ti.UI.createView({
 	backgroundImage:IMAGE_PATH+'card/background_B.jpg',
-	bottom:65
+	bottom:65,
+	opacity:0
 });
 
 win.add(viewCards);

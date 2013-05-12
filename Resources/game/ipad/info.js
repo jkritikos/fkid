@@ -1,5 +1,6 @@
 //unselect player tab when info view is opened
-unselectPlayerTab();
+playerTabSelected.hide();
+viewPlayer.zIndex = 0;
 
 //info view
 var viewInfo = Ti.UI.createView({

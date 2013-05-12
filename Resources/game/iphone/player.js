@@ -1,6 +1,8 @@
 //play in background
 Titanium.Media.audioSessionMode = Titanium.Media.AUDIO_SESSION_MODE_PLAYBACK;
 
+var playerNoInternetBar = null;
+
 //audioplayer
 var audioPlayer = Ti.Media.createAudioPlayer({ 
     url: 'http://80.237.158.95:8011/stream',
@@ -45,11 +47,11 @@ infoButton.addEventListener('click', handleInfoButton);
 
 //check if user is online - if not show error message
 if(!Titanium.Network.online){
-	var noInternetBar = Ti.UI.createImageView({
+	playerNoInternetBar = Ti.UI.createImageView({
 		image:IMAGE_PATH+'player/error_bar.png',
 		bottom:35
 	});
-	viewPlayer.add(noInternetBar);
+	viewPlayer.add(playerNoInternetBar);
 	
 	var noInternetLabel = Ti.UI.createLabel({
 		text:'Φαίνεται να μην είσαι συνδεδεμένος στο Internet.. Συνδέσου και δοκίμασε ξανά!',
@@ -61,23 +63,44 @@ if(!Titanium.Network.online){
 	noInternetBar.add(noInternetLabel);
 }
 
+//activity Indicator
+var activityIndicator = Ti.UI.createActivityIndicator({
+	style:Titanium.UI.iPhone.ActivityIndicatorStyle.BIG
+});
+playerPlayButton.add(activityIndicator);
+activityIndicator.hide();
+
 win.add(viewPlayer);
 
 //handles the play button
 function playButton(){
-	if (audioPlayer.playing){
-        audioPlayer.stop();
-        playerPlayButton.active = false; 
-        playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
-    }else{
-        audioPlayer.start();
-        playerPlayButton.active = true;
-        playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
-    }
-		
+	if(Titanium.Network.online == true){
+		if (audioPlayer.playing){
+	        audioPlayer.pause();
+	        playerPlayButton.active = false; 
+	        playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
+	    }else if(audioPlayer.paused){
+	    	audioPlayer.start();
+	        playerPlayButton.active = true;
+	        playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
+	    }else{
+	        playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
+	    	activityIndicator.show();
+	    	audioPlayer.start();
+	    	//set Timeout to hide activity indicator and show pause
+	    	setTimeout(function(){
+	    		activityIndicator.hide();
+	        	playerPlayButton.active = true;
+	        	playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
+	    	}, 3000);
+	    }
+	}	
 }
 
 //handles info button and directs to info.js
 function handleInfoButton(){
-	Ti.include(TYPE_PATH+'info.js');
+	playerTabSelected.hide();
+	
+	viewPlayer.animate(anim_out);
+	viewInfo.animate(anim_in);
 }
