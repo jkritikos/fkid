@@ -74,6 +74,7 @@ win.add(viewPlayer);
 
 //handles the play button
 function playButton(){
+	
 	if(Titanium.Network.online == true){
 		if (audioPlayer.playing){
 	        audioPlayer.pause();
@@ -84,15 +85,20 @@ function playButton(){
 	        playerPlayButton.active = true;
 	        playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
 	    }else{
-	        playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
-	    	activityIndicator.show();
 	    	audioPlayer.start();
-	    	//set Timeout to hide activity indicator and show pause
-	    	setTimeout(function(){
-	    		activityIndicator.hide();
-	        	playerPlayButton.active = true;
-	        	playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
-	    	}, 3000);
+	    	var waiting = audioPlayer.getWaiting();
+	    	
+	    	//show activity indicator until waiting is false
+	    	while(waiting){
+	    		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
+	    		activityIndicator.show();
+	    		waiting = audioPlayer.getWaiting();
+	    	}
+	        
+	        //then show pause
+	    	activityIndicator.hide();
+	        playerPlayButton.active = true;
+	        playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
 	    }
 	}	
 }
