@@ -60,17 +60,16 @@ viewSchedule.add(loadingBar3);
 
 //blue bar 1
 var blueBar1 = Ti.UI.createImageView({
-	image:IMAGE_PATH+'program/loading_bar2.png',
-	left:70,
+	//image:IMAGE_PATH+'program/loading_bar2.png',
+	//left:70,
 	top:220,
 	zIndex:1
 });
 
 viewSchedule.add(blueBar1);
-blueBar1.hide();
 
 //blue bar 1
-var blueBar2 = Ti.UI.createImageView({
+/*var blueBar2 = Ti.UI.createImageView({
 	image:IMAGE_PATH+'program/loading_bar2.png',
 	top:220,
 	zIndex:1
@@ -88,7 +87,7 @@ var blueBar3 = Ti.UI.createImageView({
 });
 
 viewSchedule.add(blueBar3);
-blueBar3.hide();
+blueBar3.hide();*/
 
 //schedule table view
 var scheduleTableView = Ti.UI.createTableView({
@@ -100,5 +99,6 @@ var scheduleTableView = Ti.UI.createTableView({
 });
 //start Loading of bars 
 barsLoading(start);
+//barsLoading(start);
 //get data and show table
-getOnlineSchedule();
+//getOnlineSchedule();

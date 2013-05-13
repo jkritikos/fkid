@@ -60,7 +60,7 @@ if(!Titanium.Network.online){
 		textAlign:'center',
 		font:{fontSize:13, fontFamily:'Helvetica'}
 	});
-	noInternetBar.add(noInternetLabel);
+	playerNoInternetBar.add(noInternetLabel);
 }
 
 //activity Indicator
@@ -78,30 +78,47 @@ function playButton(){
 	if(Titanium.Network.online == true){
 		if (audioPlayer.playing){
 	        audioPlayer.pause();
-	        playerPlayButton.active = false; 
-	        playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
 	    }else if(audioPlayer.paused){
 	    	audioPlayer.start();
-	        playerPlayButton.active = true;
-	        playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
 	    }else{
 	    	audioPlayer.start();
-	    	var waiting = audioPlayer.getWaiting();
-	    	
-	    	//show activity indicator until waiting is false
-	    	while(waiting){
-	    		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
-	    		activityIndicator.show();
-	    		waiting = audioPlayer.getWaiting();
-	    	}
-	        
-	        //then show pause
-	    	activityIndicator.hide();
-	        playerPlayButton.active = true;
-	        playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
 	    }
 	}	
 }
+
+//event when waiting for data
+audioPlayer.addEventListener('change', function(){
+	if(audioPlayer.STATE_WAITING_FOR_DATA){
+		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
+		activityIndicator.show();
+	}
+});
+
+//event when playing audio
+audioPlayer.addEventListener('change', function(){
+	if(audioPlayer.playing){
+		playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
+		activityIndicator.hide();
+	}
+});
+
+//event when paused
+audioPlayer.addEventListener('change', function(){
+	if(audioPlayer.paused){
+		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
+		activityIndicator.hide();
+	}
+});
+
+
+audioPlayer.addEventListener('progress',function(e) {
+    Ti.API.info('Time Played: ' + Math.round(e.progress) + ' milliseconds');
+});
+
+audioPlayer.addEventListener('change',function(e)
+{
+    Ti.API.info('State: ' + e.description + ' (' + e.state + ')');
+});
 
 //handles info button and directs to info.js
 function handleInfoButton(){

@@ -13,12 +13,12 @@ if(isIpad){
 //Fade in animation
 var anim_in = Titanium.UI.createAnimation();
 anim_in.opacity=1;
-anim_in.duration = 400;
+anim_in.duration = 250;
 
 //Fade out animation
 var anim_out = Titanium.UI.createAnimation();
 anim_out.opacity=0;
-anim_out.duration = 400;
+anim_out.duration = 250;
 
 //create window
 var win = Titanium.UI.createWindow({
@@ -34,6 +34,8 @@ Ti.include(TYPE_PATH+'player.js');
 Ti.include(TYPE_PATH+'info.js');
 
 viewPlayer.animate(anim_in);
+
+var tableShown = false;
 
 //tab bar
 var tabBar = Ti.UI.createImageView({
@@ -149,9 +151,14 @@ function handleScheduleTab(){
 		scheduleTabSelected.show();
 		playerTabSelected.hide();
 		
-		if(Titanium.Network.online == true){
-			Ti.include(TYPE_PATH+'schedule.js');
+		if (tableShown){
+			viewSchedule.add(scheduleTableView);
+			Ti.API.info('inside handler');
 		}
+		
+		getOnlineSchedule();
+		
+		
 		viewPlayer.animate(anim_out);
 		viewSchedule.animate(anim_in);
 		viewCards.animate(anim_out);
