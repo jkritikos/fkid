@@ -1,8 +1,8 @@
-#appname: iFeelKid
-#publisher: velerofont
-#url: http://
-#image: appicon.png
-#appid: com.companyname.appname
-#desc: undefined
-#type: ipad
-#guid: 2115470c-c293-4d42-bb09-0ff8632fa1da
+#appname:iFeelKid
+#publisher:velerofont
+#url:http://
+#image:appicon.png
+#appid:com.veladia.testing
+#desc:not specified
+#type:ipad
+#guid:2115470c-c293-4d42-bb09-0ff8632fa1da
