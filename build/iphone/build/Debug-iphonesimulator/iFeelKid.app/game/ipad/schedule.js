@@ -1,1 +1,0 @@
-/Users/velerofont/Desktop/fkid/Resources/game/ipad/schedule.js
