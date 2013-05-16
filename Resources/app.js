@@ -1,13 +1,21 @@
 
+//Labels
+var MSG_NO_INTERNET = 'Φαίνεται να μην είσαι συνδεδεμένος στο Internet.. Συνδέσου και δοκίμασε ξανά!';
+var SCHEDULE_TITLE = 'loading...';
+var INFO_TITLE = 'Βρείτε μας';
+var CARDS_TITLE = 'Ήξερες ότι..';
+var tableShown = false;
+
+
 var isIpad = (Ti.Platform.osname == 'ipad') ? true : false;
 
 var IMAGE_PATH = 'images/iphone/';
-var TYPE_PATH = 'game/iphone/';
+var TYPE_PATH = 'app/iphone/';
 
 //check if it is an ipad
 if(isIpad){
 	IMAGE_PATH = 'images/ipad/';
-	TYPE_PATH = 'game/ipad/';
+	TYPE_PATH = 'app/ipad/';
 }
 
 //Fade in animation
@@ -26,10 +34,10 @@ var win = Titanium.UI.createWindow({
 });
 
 //included all files 
-Ti.include('game/dao.js');
+Ti.include('app/server.js');
 
-Ti.include(TYPE_PATH+'cards.js');
 Ti.include(TYPE_PATH+'schedule.js');
+Ti.include(TYPE_PATH+'cards.js');
 Ti.include(TYPE_PATH+'player.js');
 Ti.include(TYPE_PATH+'info.js');
 
@@ -137,34 +145,30 @@ function handleCardsTab(){
 		viewCards.animate(anim_in);
 		viewInfo.animate(anim_out);
 		
-		//change the zIndex of viewPlayer who is a constant view
-		viewPlayer.zIndex = 0;
-		
 		//stop bars Loading
-		barsLoading(stop);
 		//remove no internet error if user opens internet while app is open
 		disablePlayerNoInternet();
 }
+
 
 function handleScheduleTab(){
 		cardsTabSelected.hide();
 		scheduleTabSelected.show();
 		playerTabSelected.hide();
 		
-		if (tableShown){
-			viewSchedule.add(scheduleTableView);
-			Ti.API.info('inside handler');
+		if(!tableShown){
+			barsLoading(start);
 		}
 		
-		getOnlineSchedule();
-		
+		if(Titanium.Network.online == true){
+			getOnlineSchedule();
+		}
 		
 		viewPlayer.animate(anim_out);
 		viewSchedule.animate(anim_in);
 		viewCards.animate(anim_out);
 		viewInfo.animate(anim_out);
 		
-		viewPlayer.zIndex = 0;
 		disablePlayerNoInternet();
 }
 
@@ -178,8 +182,19 @@ function handlePlayerTab(){
 		viewCards.animate(anim_out);
 		viewInfo.animate(anim_out);
 		
-		//increase the zIndex to show viewPlayer
-		viewPlayer.zIndex = 2;
-		barsLoading(stop);
 		disablePlayerNoInternet();
+}
+
+
+
+//disable internet if user enabled internet while app was active
+function disablePlayerNoInternet(){
+	if(Titanium.Network.online == true){
+		if(playerNoInternetBar != null){
+			audioPlayer.stop();
+			playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
+			playerPlayButton.active = false;
+			playerNoInternetBar.hide;
+		}
+	}
 }

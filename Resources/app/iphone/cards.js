@@ -17,7 +17,7 @@ viewCards.add(titleCardPopup);
 
 //title label in the popup
 var titleCardLabel = Ti.UI.createLabel({
-	text:'Ήξερες ότι..',
+	text:CARDS_TITLE,
 	color:'3bb3e6',
 	textAlign:'center',
 	width:150,

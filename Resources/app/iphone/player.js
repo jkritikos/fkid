@@ -12,7 +12,8 @@ var audioPlayer = Ti.Media.createAudioPlayer({
 //player view
 var viewPlayer = Ti.UI.createView({
 	backgroundImage:IMAGE_PATH+'player/background.jpg',
-	bottom:65
+	bottom:65,
+	opacity:0
 });
 
 //play button
@@ -54,13 +55,15 @@ if(!Titanium.Network.online){
 	viewPlayer.add(playerNoInternetBar);
 	
 	var noInternetLabel = Ti.UI.createLabel({
-		text:'Φαίνεται να μην είσαι συνδεδεμένος στο Internet.. Συνδέσου και δοκίμασε ξανά!',
+		text:MSG_NO_INTERNET,
 		color:'white',
 		width:280,
 		textAlign:'center',
 		font:{fontSize:13, fontFamily:'Helvetica'}
 	});
 	playerNoInternetBar.add(noInternetLabel);
+	
+	playerPlayButton.removeEventListener('click', playButton); 
 }
 
 //activity Indicator
@@ -87,26 +90,18 @@ function playButton(){
 }
 
 //event when waiting for data
-audioPlayer.addEventListener('change', function(){
-	if(audioPlayer.STATE_WAITING_FOR_DATA){
-		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
-		activityIndicator.show();
-	}
-});
-
-//event when playing audio
-audioPlayer.addEventListener('change', function(){
+audioPlayer.addEventListener('change', function(e){
+	Ti.API.info('State: ' + e.description + ' (' + e.state + ')');
+	
 	if(audioPlayer.playing){
 		playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
 		activityIndicator.hide();
-	}
-});
-
-//event when paused
-audioPlayer.addEventListener('change', function(){
-	if(audioPlayer.paused){
+	}else if(audioPlayer.paused){
 		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
 		activityIndicator.hide();
+	}else if(audioPlayer.STATE_WAITING_FOR_DATA){
+		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
+		activityIndicator.show();
 	}
 });
 
@@ -115,10 +110,6 @@ audioPlayer.addEventListener('progress',function(e) {
     Ti.API.info('Time Played: ' + Math.round(e.progress) + ' milliseconds');
 });
 
-audioPlayer.addEventListener('change',function(e)
-{
-    Ti.API.info('State: ' + e.description + ' (' + e.state + ')');
-});
 
 //handles info button and directs to info.js
 function handleInfoButton(){

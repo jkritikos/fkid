@@ -19,7 +19,7 @@ viewInfo.add(titleInfoPopup);
 
 //title label in popup
 var titleInfoLabel = Ti.UI.createLabel({
-	text:'Βρείτε μας',
+	text:INFO_TITLE,
 	color:'3bb3e6',
 	textAlign:'center',
 	width:150,
