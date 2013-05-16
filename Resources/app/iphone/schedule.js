@@ -5,7 +5,6 @@ var currentBar = 1;
 var leftOffset = null;
 var loadingBarsInterval = null;
 
-
 //schedule view
 var viewSchedule = Ti.UI.createView({
 	backgroundImage:IMAGE_PATH+'program/background_B.jpg',
@@ -15,25 +14,20 @@ var viewSchedule = Ti.UI.createView({
 
 win.add(viewSchedule);
 
-//check if user is online - if not show error message
-if(!Titanium.Network.online){
-	titleScheduleLabel.text = 'OOPS!'
-	
-	var scheduleNoInternetBar = Ti.UI.createImageView({
-		image:IMAGE_PATH+'player/error_bar.png',
-		bottom:150
-	});
-	viewSchedule.add(scheduleNoInternetBar);
-	
-	var scheduleNoInternetLabel = Ti.UI.createLabel({
-		text:MSG_NO_INTERNET,
-		color:'white',
-		width:280,
-		textAlign:'center',
-		font:{fontSize:13, fontFamily:'Helvetica'}
-	});
-	scheduleNoInternetBar.add(scheduleNoInternetLabel);
-}
+//no internet bar
+var scheduleNoInternetBar = Ti.UI.createImageView({
+	image:IMAGE_PATH+'player/error_bar.png',
+	bottom:150
+});
+
+var scheduleNoInternetLabel = Ti.UI.createLabel({
+	text:MSG_NO_INTERNET,
+	color:'white',
+	width:280,
+	textAlign:'center',
+	font:{fontSize:13, fontFamily:'Helvetica'}
+});
+scheduleNoInternetBar.add(scheduleNoInternetLabel);
 
 //title popup
 var titleSchedulePopup = Ti.UI.createImageView({
@@ -136,7 +130,7 @@ function displayTable(e){
 	populateTableView(program);
 	
 	if(!tableShown){
-		barsLoading(stop);
+		barsLoading(STOP);
 		viewSchedule.add(scheduleTableView);
 		tableShown = true;	
 	}
@@ -225,6 +219,10 @@ function populateTableView(data){
 
 function barsLoading(action){
 	if(action == 1){
+		loadingBar1.show();
+		loadingBar2.show();
+		loadingBar3.show();
+		blueBar1.show();
 		loadingBarsInterval = setInterval(animateBars, 300);
 	}else if(action == 0){
 		loadingBar1.hide();
@@ -251,5 +249,18 @@ function animateBars(){
 		leftOffset = 198;
 		blueBar1.left = leftOffset;
 		currentBar = 1;
+	}
+}
+
+function checkScheduleInternet(){
+	if(Titanium.Network.online == true){
+		getOnlineSchedule();
+		viewSchedule.remove(scheduleNoInternetBar);
+	}else{
+		if(!tableShown){
+			barsLoading(STOP);
+			titleScheduleLabel.text = 'OOPS!'
+			viewSchedule.add(scheduleNoInternetBar);
+		}
 	}
 }

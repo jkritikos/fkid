@@ -4,8 +4,11 @@ var MSG_NO_INTERNET = 'Φαίνεται να μην είσαι συνδεδεμ�
 var SCHEDULE_TITLE = 'loading...';
 var INFO_TITLE = 'Βρείτε μας';
 var CARDS_TITLE = 'Ήξερες ότι..';
-var tableShown = false;
 
+var tableShown = false;
+var SERVER_TIMEOUT = 20000;
+var STOP = 0;
+var START = 1;
 
 var isIpad = (Ti.Platform.osname == 'ipad') ? true : false;
 
@@ -144,10 +147,6 @@ function handleCardsTab(){
 		viewSchedule.animate(anim_out);
 		viewCards.animate(anim_in);
 		viewInfo.animate(anim_out);
-		
-		//stop bars Loading
-		//remove no internet error if user opens internet while app is open
-		disablePlayerNoInternet();
 }
 
 
@@ -157,19 +156,15 @@ function handleScheduleTab(){
 		playerTabSelected.hide();
 		
 		if(!tableShown){
-			barsLoading(start);
+			barsLoading(START);
 		}
 		
-		if(Titanium.Network.online == true){
-			getOnlineSchedule();
-		}
+		checkScheduleInternet();
 		
 		viewPlayer.animate(anim_out);
 		viewSchedule.animate(anim_in);
 		viewCards.animate(anim_out);
 		viewInfo.animate(anim_out);
-		
-		disablePlayerNoInternet();
 }
 
 function handlePlayerTab(){
@@ -177,24 +172,10 @@ function handlePlayerTab(){
 		scheduleTabSelected.hide();
 		playerTabSelected.show();
 		
+		checkPlayerInternet();
+		
 		viewPlayer.animate(anim_in);
 		viewSchedule.animate(anim_out);
 		viewCards.animate(anim_out);
 		viewInfo.animate(anim_out);
-		
-		disablePlayerNoInternet();
-}
-
-
-
-//disable internet if user enabled internet while app was active
-function disablePlayerNoInternet(){
-	if(Titanium.Network.online == true){
-		if(playerNoInternetBar != null){
-			audioPlayer.stop();
-			playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
-			playerPlayButton.active = false;
-			playerNoInternetBar.hide;
-		}
-	}
 }

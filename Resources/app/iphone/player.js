@@ -21,8 +21,7 @@ var playerPlayButton = Ti.UI.createButton({
 	backgroundImage:IMAGE_PATH+'player/play.png',
 	top:145,
 	width:167,
-	height:167,
-	active:false
+	height:167
 });
 
 viewPlayer.add(playerPlayButton);
@@ -34,6 +33,21 @@ var playerLogo = Ti.UI.createImageView({
 	top:15
 });
 viewPlayer.add(playerLogo);
+
+playerNoInternetBar = Ti.UI.createImageView({
+	image:IMAGE_PATH+'player/error_bar.png',
+	bottom:35
+});
+viewPlayer.add(playerNoInternetBar);
+
+var noInternetLabel = Ti.UI.createLabel({
+	text:MSG_NO_INTERNET,
+	color:'white',
+	width:280,
+	textAlign:'center',
+	font:{fontSize:13, fontFamily:'Helvetica'}
+});
+playerNoInternetBar.add(noInternetLabel);
 
 //info button
 var infoButton = Ti.UI.createButton({
@@ -47,24 +61,7 @@ viewPlayer.add(infoButton);
 infoButton.addEventListener('click', handleInfoButton); 
 
 //check if user is online - if not show error message
-if(!Titanium.Network.online){
-	playerNoInternetBar = Ti.UI.createImageView({
-		image:IMAGE_PATH+'player/error_bar.png',
-		bottom:35
-	});
-	viewPlayer.add(playerNoInternetBar);
-	
-	var noInternetLabel = Ti.UI.createLabel({
-		text:MSG_NO_INTERNET,
-		color:'white',
-		width:280,
-		textAlign:'center',
-		font:{fontSize:13, fontFamily:'Helvetica'}
-	});
-	playerNoInternetBar.add(noInternetLabel);
-	
-	playerPlayButton.removeEventListener('click', playButton); 
-}
+checkPlayerInternet();
 
 //activity Indicator
 var activityIndicator = Ti.UI.createActivityIndicator({
@@ -93,13 +90,18 @@ function playButton(){
 audioPlayer.addEventListener('change', function(e){
 	Ti.API.info('State: ' + e.description + ' (' + e.state + ')');
 	
-	if(audioPlayer.playing){
+	//4:playing - 8:paused - 7:stopped - 2:waiting_for_data
+	
+	if(e.state == 4){
 		playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
 		activityIndicator.hide();
-	}else if(audioPlayer.paused){
+	}else if(e.state == 8){
 		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
 		activityIndicator.hide();
-	}else if(audioPlayer.STATE_WAITING_FOR_DATA){
+	}else if(e.state == 7){
+		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
+		activityIndicator.hide();
+	}else if(e.state == 2){
 		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
 		activityIndicator.show();
 	}
@@ -117,4 +119,14 @@ function handleInfoButton(){
 	
 	viewPlayer.animate(anim_out);
 	viewInfo.animate(anim_in);
+}
+
+function checkPlayerInternet(){
+	if(!Titanium.Network.online){
+		playerNoInternetBar.show();
+		audioPlayer.stop();
+		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
+	}else{
+		playerNoInternetBar.hide();
+	}
 }
