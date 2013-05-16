@@ -86,8 +86,17 @@ function playButton(){
 	}	
 }
 
-//event when waiting for data
-audioPlayer.addEventListener('change', function(e){
+//event for the state of the audio player
+audioPlayer.addEventListener('change', audioPlayerState);
+
+//event for the progress of the audio player
+audioPlayer.addEventListener('progress', audioPlayerProgress);
+
+function audioPlayerProgress(e) {
+    Ti.API.info('Time Played: ' + Math.round(e.progress) + ' milliseconds');
+}
+
+function audioPlayerState(e){
 	Ti.API.info('State: ' + e.description + ' (' + e.state + ')');
 	
 	//4:playing - 8:paused - 7:stopped - 2:waiting_for_data
@@ -105,12 +114,7 @@ audioPlayer.addEventListener('change', function(e){
 		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
 		activityIndicator.show();
 	}
-});
-
-
-audioPlayer.addEventListener('progress',function(e) {
-    Ti.API.info('Time Played: ' + Math.round(e.progress) + ' milliseconds');
-});
+}
 
 
 //handles info button and directs to info.js
