@@ -35,6 +35,7 @@ var infoButton = Ti.UI.createImageView({
 	top:0
 });
 viewInfo.add(infoButton);
+infoButton.addEventListener('click', handleInfoButton); 
 
 //site button
 var siteButton = Ti.UI.createButton({
@@ -86,4 +87,11 @@ function sendMail(){
 //open the site in the safari
 function openSiteInSafari(){
 	Titanium.Platform.openURL('http://www.ifeelkid.gr');
+}
+
+function handleInfoButton(){
+	playerTabSelected.show();
+	
+	viewPlayer.animate(anim_in);
+	viewInfo.animate(anim_out);
 }

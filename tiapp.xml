@@ -25,8 +25,8 @@
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
     <statusbar-style>default</statusbar-style>
-    <statusbar-hidden>false</statusbar-hidden>
-    <fullscreen>false</fullscreen>
+    <statusbar-hidden>true</statusbar-hidden>
+    <fullscreen>true</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
     <guid>2115470c-c293-4d42-bb09-0ff8632fa1da</guid>

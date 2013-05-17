@@ -50,15 +50,15 @@ var noInternetLabel = Ti.UI.createLabel({
 playerNoInternetBar.add(noInternetLabel);
 
 //info button
-var infoButton = Ti.UI.createButton({
+var playerInfoButton = Ti.UI.createButton({
 	backgroundImage:IMAGE_PATH+'player/button_info_a.png',
 	left:0,
 	width:54,
 	height:51,
 	top:0
 });
-viewPlayer.add(infoButton);
-infoButton.addEventListener('click', handleInfoButton); 
+viewPlayer.add(playerInfoButton);
+playerInfoButton.addEventListener('click', handlePlayerInfoButton); 
 
 //check if user is online - if not show error message
 checkPlayerInternet();
@@ -71,6 +71,12 @@ playerPlayButton.add(activityIndicator);
 activityIndicator.hide();
 
 win.add(viewPlayer);
+
+//event for the state of the audio player
+audioPlayer.addEventListener('change', audioPlayerState);
+
+//event for the progress of the audio player
+audioPlayer.addEventListener('progress', audioPlayerProgress);
 
 //handles the play button
 function playButton(){
@@ -86,11 +92,6 @@ function playButton(){
 	}	
 }
 
-//event for the state of the audio player
-audioPlayer.addEventListener('change', audioPlayerState);
-
-//event for the progress of the audio player
-audioPlayer.addEventListener('progress', audioPlayerProgress);
 
 function audioPlayerProgress(e) {
     Ti.API.info('Time Played: ' + Math.round(e.progress) + ' milliseconds');
@@ -104,10 +105,7 @@ function audioPlayerState(e){
 	if(e.state == 4){
 		playerPlayButton.backgroundImage = IMAGE_PATH+'player/pause.png';
 		activityIndicator.hide();
-	}else if(e.state == 8){
-		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
-		activityIndicator.hide();
-	}else if(e.state == 7){
+	}else if(e.state == 8 || e.state == 7){
 		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play.png';
 		activityIndicator.hide();
 	}else if(e.state == 2){
@@ -118,7 +116,7 @@ function audioPlayerState(e){
 
 
 //handles info button and directs to info.js
-function handleInfoButton(){
+function handlePlayerInfoButton(){
 	playerTabSelected.hide();
 	
 	viewPlayer.animate(anim_out);

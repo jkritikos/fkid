@@ -1,5 +1,4 @@
-//url
-var url = 'http://www.ifeelkid.gr/program/';
+
 var tableShown = false;
 var currentBar = 1;
 var leftOffset = null;
@@ -253,6 +252,7 @@ function animateBars(){
 }
 
 function checkScheduleInternet(){
+	
 	if(Titanium.Network.online == true){
 		getOnlineSchedule();
 		viewSchedule.remove(scheduleNoInternetBar);

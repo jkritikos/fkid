@@ -1,3 +1,5 @@
+//url
+var url = 'http://www.ifeelkid.gr/program/';
 
 //Labels
 var MSG_NO_INTERNET = 'Φαίνεται να μην είσαι συνδεδεμένος στο Internet.. Συνδέσου και δοκίμασε ξανά!';
@@ -9,6 +11,7 @@ var tableShown = false;
 var SERVER_TIMEOUT = 20000;
 var STOP = 0;
 var START = 1;
+var scheduleTabOpened = false;
 
 var isIpad = (Ti.Platform.osname == 'ipad') ? true : false;
 
@@ -130,8 +133,31 @@ cardsTabSelected.addEventListener('click', handleCardsTab);
 
 win.open();
 
+Titanium.App.addEventListener('resume', function(e){
+	checkPlayerInternet();
+	
+	if(!tableShown){
+		barsLoading(START);
+	}
+	checkScheduleInternet();
+});
+
+Titanium.Network.addEventListener('change', function(e){
+	checkPlayerInternet();
+	
+	if(scheduleTabOpened){
+		if(!tableShown){
+			barsLoading(START);
+		}
+		checkScheduleInternet();
+	}
+});
+
 //Event functions for tabs
 function handleCardsTab(){
+	
+		scheduleTabOpened = false;
+		
 		//hide and show accordingly tabs
 		cardsTabSelected.show();
 		scheduleTabSelected.hide();
@@ -151,6 +177,9 @@ function handleCardsTab(){
 
 
 function handleScheduleTab(){
+	
+		scheduleTabOpened = true;
+		
 		cardsTabSelected.hide();
 		scheduleTabSelected.show();
 		playerTabSelected.hide();
@@ -168,6 +197,9 @@ function handleScheduleTab(){
 }
 
 function handlePlayerTab(){
+		
+		scheduleTabOpened = false;
+		
 		cardsTabSelected.hide();
 		scheduleTabSelected.hide();
 		playerTabSelected.show();
