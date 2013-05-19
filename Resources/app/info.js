@@ -57,6 +57,7 @@ var facebookButton = Ti.UI.createButton({
 	height:isIpad ? 115 : 58
 });
 viewInfo.add(facebookButton);
+facebookButton.addEventListener('click', openFacebookSite);
 
 //mail button
 var mailButton = Ti.UI.createButton({
@@ -76,6 +77,7 @@ var tweeterButton = Ti.UI.createButton({
 	height:isIpad ? 115 : 58
 });
 viewInfo.add(tweeterButton);
+tweeterButton.addEventListener('click', openTwitterSite);
 
 //send mail function
 function sendMail(){
@@ -87,6 +89,14 @@ function sendMail(){
 //open the site in the safari
 function openSiteInSafari(){
 	Titanium.Platform.openURL('http://www.ifeelkid.gr');
+}
+
+function openFacebookSite(){
+	Titanium.Platform.openURL('http://www.facebook.com/ifeelkid');
+}
+
+function openTwitterSite(){
+	Titanium.Platform.openURL('http://www.twitter.com/ifeelkid');
 }
 
 function handleInfoButton(){
