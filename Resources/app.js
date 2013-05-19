@@ -14,6 +14,13 @@ var START = 1;
 var scheduleTabOpened = false;
 
 var isIpad = (Ti.Platform.osname == 'ipad') ? true : false;
+var IPHONE5 = false;
+if(!isIpad && Ti.Platform.displayCaps.platformHeight == 568){
+	IPHONE5 = true;	
+}
+
+Ti.API.info('IPHONE5='+IPHONE5);
+Ti.API.info('isIpad='+isIpad);
 
 var IMAGE_PATH = 'images/iphone/';
 var TYPE_PATH = 'app/iphone/';

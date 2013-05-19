@@ -1,3 +1,6 @@
+//height offset for iphone5
+var PLAYER_IPHONE5_OFFSET_HEIGHT = 50;
+
 //play in background
 Titanium.Media.audioSessionMode = Titanium.Media.AUDIO_SESSION_MODE_PLAYBACK;
 
@@ -17,9 +20,10 @@ var viewPlayer = Ti.UI.createView({
 });
 
 //play button
+var playerPlayButtonTop = IPHONE5 ? 145+PLAYER_IPHONE5_OFFSET_HEIGHT : 145;
 var playerPlayButton = Ti.UI.createButton({
 	backgroundImage:IMAGE_PATH+'player/play.png',
-	top:isIpad ? 340 : 145,
+	top:isIpad ? 340 : playerPlayButtonTop,
 	width:isIpad ? 364 : 167,
 	height:isIpad ? 364 : 167
 });
@@ -28,9 +32,10 @@ viewPlayer.add(playerPlayButton);
 playerPlayButton.addEventListener('click', playButton); 
 
 //application logo
+var playerLogoTop = IPHONE5 ? 15+PLAYER_IPHONE5_OFFSET_HEIGHT : 15;
 var playerLogo = Ti.UI.createImageView({
 	image:IMAGE_PATH+'player/logo.png',
-	top:isIpad ? 40 : 15
+	top:isIpad ? 40 : playerLogoTop
 });
 viewPlayer.add(playerLogo);
 

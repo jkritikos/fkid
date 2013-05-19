@@ -1,3 +1,6 @@
+//height offset for iphone5
+var CARDS_IPHONE5_OFFSET_HEIGHT = 50;
+
 //cards view
 var viewCards = Ti.UI.createView({
 	backgroundImage:IMAGE_PATH+'card/background_B.jpg',
@@ -28,17 +31,19 @@ var titleCardLabel = Ti.UI.createLabel({
 titleCardPopup.add(titleCardLabel);
 
 //card
+var cardImageTop = IPHONE5 ? 73+CARDS_IPHONE5_OFFSET_HEIGHT : 73;
 var cardImage = Ti.UI.createImageView({
 	image:IMAGE_PATH+'card/card.png',
-	top:isIpad ? 155 : 73
+	top:isIpad ? 155 : cardImageTop
 });
 
 viewCards.add(cardImage);
 
 //coming soon image
+var comingSoonImageTop = IPHONE5 ? 53+CARDS_IPHONE5_OFFSET_HEIGHT : 53;
 var comingSoonImage = Ti.UI.createImageView({
 	image:IMAGE_PATH+'card/comingsoon.png',
-	top:isIpad ? 130 : 53,
+	top:isIpad ? 130 : comingSoonImageTop,
 	right:isIpad ? 32 : 5
 });
 
