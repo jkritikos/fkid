@@ -49,30 +49,30 @@ siteButton.addEventListener('click', openSiteInSafari);
 
 var infoOffset = isIpad ? 135 : 65;
 
-//facebook button
-var facebookButton = Ti.UI.createButton({
-	image:IMAGE_PATH+'info/info2.png',
-	top:siteButton.top + infoOffset,
-	width:isIpad ? 768 : 320,
-	height:isIpad ? 115 : 58
-});
-viewInfo.add(facebookButton);
-facebookButton.addEventListener('click', openFacebookSite);
-
 //mail button
 var mailButton = Ti.UI.createButton({
 	image:IMAGE_PATH+'info/info3.png',
-	top:facebookButton.top + infoOffset,
+	top:siteButton.top + infoOffset,
 	width:isIpad ? 768 : 320,
 	height:isIpad ? 115 : 58
 });
 viewInfo.add(mailButton);
 mailButton.addEventListener('click', sendMail);
 
+//facebook button
+var facebookButton = Ti.UI.createButton({
+	image:IMAGE_PATH+'info/info2.png',
+	top:mailButton.top + infoOffset,
+	width:isIpad ? 768 : 320,
+	height:isIpad ? 115 : 58
+});
+viewInfo.add(facebookButton);
+facebookButton.addEventListener('click', openFacebookSite);
+
 //tweeter button
 var tweeterButton = Ti.UI.createButton({
 	image:IMAGE_PATH+'info/info4.png',
-	top:mailButton.top + infoOffset,
+	top:facebookButton.top + infoOffset,
 	width:isIpad ? 768 : 320,
 	height:isIpad ? 115 : 58
 });
