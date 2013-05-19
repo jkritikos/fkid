@@ -7,7 +7,7 @@ var loadingBarsInterval = null;
 //schedule view
 var viewSchedule = Ti.UI.createView({
 	backgroundImage:IMAGE_PATH+'program/background_B.jpg',
-	bottom:65,
+	bottom:isIpad ? 146 : 65,
 	opacity:0
 });
 
@@ -16,15 +16,15 @@ win.add(viewSchedule);
 //no internet bar
 var scheduleNoInternetBar = Ti.UI.createImageView({
 	image:IMAGE_PATH+'player/error_bar.png',
-	bottom:150
+	bottom:isIpad ? 347 : 150
 });
 
 var scheduleNoInternetLabel = Ti.UI.createLabel({
 	text:MSG_NO_INTERNET,
 	color:'white',
-	width:280,
+	width:isIpad ? 600 : 280,
 	textAlign:'center',
-	font:{fontSize:13, fontFamily:'Helvetica'}
+	font:{fontSize:isIpad ? 24 : 13, fontFamily:'Helvetica'}
 });
 scheduleNoInternetBar.add(scheduleNoInternetLabel);
 
@@ -41,17 +41,17 @@ var titleScheduleLabel = Ti.UI.createLabel({
 	text:SCHEDULE_TITLE,
 	color:'3bb3e6',
 	textAlign:'center',
-	width:150,
-	top:8,
-	font:{fontSize:34, fontWeight:'bold', fontFamily:'Aka-AcidGR-Collage'}
+	width:isIpad ? 350 : 150,
+	top:isIpad ? 16 : 8,
+	font:{fontSize:isIpad ? 67 : 34, fontWeight:'bold', fontFamily:'Aka-AcidGR-Collage'}
 });
 titleSchedulePopup.add(titleScheduleLabel);
 
 //orange bar 1
 var loadingBar1 = Ti.UI.createImageView({
 	image:IMAGE_PATH+'program/loading_bar1.png',
-	left:70,
-	top:220,
+	left:isIpad ? 180 : 70,
+	top:isIpad ? 465 : 220,
 	blueBar:false
 });
 
@@ -60,7 +60,7 @@ viewSchedule.add(loadingBar1);
 //orange bar 2
 var loadingBar2 = Ti.UI.createImageView({
 	image:IMAGE_PATH+'program/loading_bar1.png',
-	top:220,
+	top:isIpad ? 465 : 220,
 	blueBar:false
 });
 
@@ -69,8 +69,8 @@ viewSchedule.add(loadingBar2);
 //orange bar 3
 var loadingBar3 = Ti.UI.createImageView({
 	image:IMAGE_PATH+'program/loading_bar1.png',
-	right:70,
-	top:220,
+	right:isIpad ? 180 : 70,
+	top:isIpad ? 465 : 220,
 	blueBar:false
 });
 
@@ -78,10 +78,8 @@ viewSchedule.add(loadingBar3);
 
 //blue bar 1
 var blueBar1 = Ti.UI.createImageView({
-	//image:IMAGE_PATH+'program/loading_bar2.png',
-	top:220,
-	zIndex:1//,
-	//opacity:0
+	top:isIpad ? 465 : 220,
+	zIndex:1
 });
 
 viewSchedule.add(blueBar1);
@@ -90,7 +88,7 @@ viewSchedule.add(blueBar1);
 var scheduleTableView = Ti.UI.createTableView({
 	backgroundColor:'transparent',
 	bottom:0,
-	top:110,
+	top:isIpad ? 207 : 110,
 	separatorColor:'transparent',
 	selectionStyle:Titanium.UI.iPhone.TableViewCellSelectionStyle.NONE
 });
@@ -158,25 +156,24 @@ function populateTableView(data){
 			
 			//program row
 			var row = Ti.UI.createTableViewRow({
-				height:55,
-				backgroundColor:'transparent', 
-				bottom:15
+				height:isIpad ? 119 : 55,
+				backgroundColor:'transparent'
 			});
 			
 			//separator row
 			var rowView = Ti.UI.createView({
-				height:51,
+				height:isIpad ? 112 : 51,
 				backgroundColor:'white',
 			});
 			
 			//time view
 			var timeView = Ti.UI.createView({
 				backgroundColor:color,
-				left:-4,
-				width:114,
-				height:35,
+				left:isIpad ? -6 : -4,
+				width:isIpad ? 235 : 114,
+				height:isIpad ? 57 : 35,
 				borderColor:color,
-				borderRadius:4
+				borderRadius:isIpad ? 6 : 4
 			});
 			
 			
@@ -185,9 +182,9 @@ function populateTableView(data){
 				text:time,
 				textAlign:'center',
 				color: 'white',
-				width:110,
-				height:35,
-				font:{fontSize:16, fontWeight: 'bold'}
+				width:isIpad ? 233 : 110,
+				height:isIpad ? 57 : 35,
+				font:{fontSize:isIpad ? 30 : 16, fontWeight: 'bold'}
 			});
 			
 			timeView.add(timeViewLabel);
@@ -197,10 +194,10 @@ function populateTableView(data){
 			var rowTitleLabel = Ti.UI.createLabel({
 				text:title,
 				textAlign:'right',
-				width:190,
-				height:50,
-				right:15,
-				font:{fontSize:14, fontFamily: 'Helvetica'}
+				width:isIpad ? 450 : 190,
+				height:isIpad ? 110 : 50,
+				right:isIpad ? 37 : 15,
+				font:{fontSize:isIpad ? 25 : 14, fontFamily: 'Helvetica'}
 			});
 			
 			row.className = 'ScheduleRow';
@@ -237,15 +234,15 @@ function animateBars(){
 	blueBar1.image = IMAGE_PATH+'program/loading_bar2.png';
 	
 	if(currentBar == 1){
-		leftOffset = 70;
+		leftOffset = isIpad ? 180 : 70;
 		blueBar1.left = leftOffset;
 		currentBar = 2;
 	}else if(currentBar == 2){
-		leftOffset = 134;
+		leftOffset = isIpad ? 325.5 : 134;
 		currentBar = 3;
 		blueBar1.left = leftOffset;
 	}else if(currentBar == 3){
-		leftOffset = 198;
+		leftOffset = isIpad ? 471 : 198;
 		blueBar1.left = leftOffset;
 		currentBar = 1;
 	}
