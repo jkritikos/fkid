@@ -10,10 +10,32 @@ Titanium.Media.audioSessionMode = Titanium.Media.AUDIO_SESSION_MODE_PLAYBACK;
 var playerNoInternetBar = null;
 
 //audioplayer
-var audioPlayer = Ti.Media.createAudioPlayer({ 
-    url: playerURL,
-    allowBackground: true
-});
+var audioPlayer = null;
+buildAudioPlayer();
+
+function buildAudioPlayer(){
+	audioPlayer = null;
+	audioPlayer = Ti.Media.createAudioPlayer({ 
+	    url: playerURL
+	});
+	
+	var bufferSize = audioPlayer.getBufferSize();
+	Ti.API.info('player bufferSize='+bufferSize);
+	
+	//event for the state of the audio player
+	audioPlayer.addEventListener('change', audioPlayerState);
+	
+	//event for the progress of the audio player
+	audioPlayer.addEventListener('progress', audioPlayerProgress);
+}
+
+function destroyAudioPlayer(){
+	if(audioPlayer != null){
+		audioPlayer.removeEventListener('change', audioPlayerState);
+		audioPlayer.removeEventListener('progress', audioPlayerProgress);
+		audioPlayer = null;
+	}
+}
 
 //player view
 var viewPlayer = Ti.UI.createView({
@@ -80,12 +102,6 @@ activityIndicator.hide();
 
 win.add(viewPlayer);
 
-//event for the state of the audio player
-audioPlayer.addEventListener('change', audioPlayerState);
-
-//event for the progress of the audio player
-audioPlayer.addEventListener('progress', audioPlayerProgress);
-
 //handles the play button
 function playButton(){
 	
@@ -119,7 +135,17 @@ function audioPlayerState(e){
 	}else if(e.state == 2){
 		playerPlayButton.backgroundImage = IMAGE_PATH+'player/play_plain.png';
 		activityIndicator.show();
+		
+		//TODO start a timer and if after X seconds the audio player ISNT playing, stop it and start again
+	} else if(e.state == 0){
+		Ti.API.info('Potential crash in audio player - attempt to recover!');
+		audioPlayer.stop();
+		destroyAudioPlayer();
+		buildAudioPlayer();
+		playButton();
 	}
+	
+	
 }
 
 

@@ -28,7 +28,7 @@
     <statusbar-hidden>true</statusbar-hidden>
     <fullscreen>true</fullscreen>
     <navbar-hidden>false</navbar-hidden>
-    <analytics>true</analytics>
+    <analytics>false</analytics>
     <guid>2115470c-c293-4d42-bb09-0ff8632fa1da</guid>
     <property name="ti.ui.defaultunit">system</property>
     <iphone>
@@ -37,6 +37,7 @@
         </backgroundModes>
         <orientations device="iphone">
             <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
         </orientations>
         <orientations device="ipad">
             <orientation>Ti.UI.PORTRAIT</orientation>

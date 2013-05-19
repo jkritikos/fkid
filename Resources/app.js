@@ -13,6 +13,9 @@ var STOP = 0;
 var START = 1;
 var scheduleTabOpened = false;
 
+//prevent the app from locking
+Ti.App.idleTimerDisabled = true;
+
 var isIpad = (Ti.Platform.osname == 'ipad') ? true : false;
 var IPHONE5 = false;
 if(!isIpad && Ti.Platform.displayCaps.platformHeight == 568){
@@ -140,12 +143,25 @@ cardsTabSelected.addEventListener('click', handleCardsTab);
 win.open();
 
 Titanium.App.addEventListener('resume', function(e){
+	Ti.API.info('APP RESUME');
+	
+	//Prevent the ALERT bug
+	if(!audioPlayer.playing){
+		Ti.API.info('Instatiating audio player on resume event');
+		destroyAudioPlayer();
+		buildAudioPlayer();
+	}
+	
 	checkPlayerInternet();
 	
 	if(!tableShown){
 		barsLoading(START);
 	}
 	checkScheduleInternet();
+});
+
+Titanium.App.addEventListener('pause', function(e){
+	Ti.API.info('APP PAUSED');
 });
 
 Titanium.Network.addEventListener('change', function(e){
