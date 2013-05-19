@@ -1,3 +1,6 @@
+var playerURL = 'http://80.237.158.95:8011/stream';
+//var playerURL = 'http://www.ifeelradio.gr/cast/tunein.php/ifeelkiddj/playlist.pls';
+
 //height offset for iphone5
 var PLAYER_IPHONE5_OFFSET_HEIGHT = 50;
 
@@ -8,7 +11,7 @@ var playerNoInternetBar = null;
 
 //audioplayer
 var audioPlayer = Ti.Media.createAudioPlayer({ 
-    url: 'http://80.237.158.95:8011/stream',
+    url: playerURL,
     allowBackground: true
 });
 
