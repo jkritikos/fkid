@@ -12,16 +12,16 @@ var audioPlayer = Ti.Media.createAudioPlayer({
 //player view
 var viewPlayer = Ti.UI.createView({
 	backgroundImage:IMAGE_PATH+'player/background.jpg',
-	bottom:65,
+	bottom:isIpad ? 146 : 65,
 	opacity:0
 });
 
 //play button
 var playerPlayButton = Ti.UI.createButton({
 	backgroundImage:IMAGE_PATH+'player/play.png',
-	top:145,
-	width:167,
-	height:167
+	top:isIpad ? 340 : 145,
+	width:isIpad ? 364 : 167,
+	height:isIpad ? 364 : 167
 });
 
 viewPlayer.add(playerPlayButton);
@@ -30,22 +30,22 @@ playerPlayButton.addEventListener('click', playButton);
 //application logo
 var playerLogo = Ti.UI.createImageView({
 	image:IMAGE_PATH+'player/logo.png',
-	top:15
+	top:isIpad ? 40 : 15
 });
 viewPlayer.add(playerLogo);
 
 playerNoInternetBar = Ti.UI.createImageView({
 	image:IMAGE_PATH+'player/error_bar.png',
-	bottom:35
+	bottom:isIpad ? 55 : 35
 });
 viewPlayer.add(playerNoInternetBar);
 
 var noInternetLabel = Ti.UI.createLabel({
 	text:MSG_NO_INTERNET,
 	color:'white',
-	width:280,
+	width:isIpad ? 600 : 280,
 	textAlign:'center',
-	font:{fontSize:13, fontFamily:'Helvetica'}
+	font:{fontSize:isIpad ? 24 : 13, fontFamily:'Helvetica'}
 });
 playerNoInternetBar.add(noInternetLabel);
 
@@ -53,8 +53,8 @@ playerNoInternetBar.add(noInternetLabel);
 var playerInfoButton = Ti.UI.createButton({
 	backgroundImage:IMAGE_PATH+'player/button_info_a.png',
 	left:0,
-	width:54,
-	height:51,
+	width:isIpad ? 118 : 54,
+	height:isIpad ? 110 : 51,
 	top:0
 });
 viewPlayer.add(playerInfoButton);

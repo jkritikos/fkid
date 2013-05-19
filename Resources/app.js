@@ -21,7 +21,6 @@ var TYPE_PATH = 'app/iphone/';
 //check if it is an ipad
 if(isIpad){
 	IMAGE_PATH = 'images/ipad/';
-	TYPE_PATH = 'app/ipad/';
 }
 
 //Fade in animation
@@ -42,10 +41,10 @@ var win = Titanium.UI.createWindow({
 //included all files 
 Ti.include('app/server.js');
 
-Ti.include(TYPE_PATH+'schedule.js');
-Ti.include(TYPE_PATH+'cards.js');
-Ti.include(TYPE_PATH+'player.js');
-Ti.include(TYPE_PATH+'info.js');
+Ti.include('app/schedule.js');
+Ti.include('app/cards.js');
+Ti.include('app/player.js');
+Ti.include('app/info.js');
 
 viewPlayer.animate(anim_in);
 
@@ -165,7 +164,7 @@ function handleCardsTab(){
 		
 		//as long as there is an Internet connection, create another view
 		if(Titanium.Network.online == true){
-			Ti.include(TYPE_PATH+'cards.js');
+			Ti.include('app/cards.js');
 		}
 		
 		//animate in corresponding view and animate out other views 
