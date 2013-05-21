@@ -13,6 +13,13 @@ var STOP = 0;
 var START = 1;
 var scheduleTabOpened = false;
 
+
+var playerTab = 1;
+var scheduleTab = 2;
+var cardsTab = 3;
+
+var activeTab = playerTab;
+
 //prevent the app from locking
 Ti.App.idleTimerDisabled = true;
 
@@ -177,7 +184,7 @@ Titanium.Network.addEventListener('change', function(e){
 
 //Event functions for tabs
 function handleCardsTab(){
-	
+	if(activeTab != cardsTab){
 		scheduleTabOpened = false;
 		
 		//hide and show accordingly tabs
@@ -185,21 +192,20 @@ function handleCardsTab(){
 		scheduleTabSelected.hide();
 		playerTabSelected.hide();
 		
-		//as long as there is an Internet connection, create another view
-		if(Titanium.Network.online == true){
-			Ti.include('app/cards.js');
-		}
 		
 		//animate in corresponding view and animate out other views 
 		viewPlayer.animate(anim_out);
 		viewSchedule.animate(anim_out);
 		viewCards.animate(anim_in);
 		viewInfo.animate(anim_out);
+		
+		activeTab = cardsTab;
+	}
 }
 
 
 function handleScheduleTab(){
-	
+	if(activeTab != scheduleTab){
 		scheduleTabOpened = true;
 		
 		cardsTabSelected.hide();
@@ -216,12 +222,15 @@ function handleScheduleTab(){
 		viewSchedule.animate(anim_in);
 		viewCards.animate(anim_out);
 		viewInfo.animate(anim_out);
+		
+		activeTab = scheduleTab;
+	}
 }
 
 function handlePlayerTab(){
-		
+	if(activeTab != playerTab){
 		scheduleTabOpened = false;
-		
+	
 		cardsTabSelected.hide();
 		scheduleTabSelected.hide();
 		playerTabSelected.show();
@@ -232,4 +241,7 @@ function handlePlayerTab(){
 		viewSchedule.animate(anim_out);
 		viewCards.animate(anim_out);
 		viewInfo.animate(anim_out);
+		
+		activeTab = playerTab;
+	}	
 }
