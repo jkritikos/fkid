@@ -13,10 +13,9 @@ var STOP = 0;
 var START = 1;
 var scheduleTabOpened = false;
 
-
-var playerTab = 1;
-var scheduleTab = 2;
-var cardsTab = 3;
+var PLAYER_TAB = 1;
+var SCHEDULE_TAB = 2;
+var CARDS_TAB = 3;
 
 var activeTab = playerTab;
 
@@ -184,7 +183,7 @@ Titanium.Network.addEventListener('change', function(e){
 
 //Event functions for tabs
 function handleCardsTab(){
-	if(activeTab != cardsTab){
+	if(activeTab != CARDS_TAB){
 		scheduleTabOpened = false;
 		
 		//hide and show accordingly tabs
@@ -199,13 +198,13 @@ function handleCardsTab(){
 		viewCards.animate(anim_in);
 		viewInfo.animate(anim_out);
 		
-		activeTab = cardsTab;
+		activeTab = CARDS_TAB;
 	}
 }
 
 
 function handleScheduleTab(){
-	if(activeTab != scheduleTab){
+	if(activeTab != SCHEDULE_TAB){
 		scheduleTabOpened = true;
 		
 		cardsTabSelected.hide();
@@ -223,12 +222,12 @@ function handleScheduleTab(){
 		viewCards.animate(anim_out);
 		viewInfo.animate(anim_out);
 		
-		activeTab = scheduleTab;
+		activeTab = SCHEDULE_TAB;
 	}
 }
 
 function handlePlayerTab(){
-	if(activeTab != playerTab){
+	if(activeTab != PLAYER_TAB){
 		scheduleTabOpened = false;
 	
 		cardsTabSelected.hide();
@@ -242,6 +241,6 @@ function handlePlayerTab(){
 		viewCards.animate(anim_out);
 		viewInfo.animate(anim_out);
 		
-		activeTab = playerTab;
+		activeTab = PLAYER_TAB;
 	}	
 }
