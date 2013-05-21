@@ -17,7 +17,7 @@ var PLAYER_TAB = 1;
 var SCHEDULE_TAB = 2;
 var CARDS_TAB = 3;
 
-var activeTab = playerTab;
+var activeTab = PLAYER_TAB;
 
 //prevent the app from locking
 Ti.App.idleTimerDisabled = true;
