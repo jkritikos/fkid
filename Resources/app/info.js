@@ -40,7 +40,7 @@ infoButton.addEventListener('click', handleInfoButton);
 //site button
 var siteButton = Ti.UI.createButton({
 	image:IMAGE_PATH+'info/info1.png',
-	top:isIpad ? 260 : 110,
+	top:isIpad ? 233 : 110,
 	width:isIpad ? 768 : 320,
 	height:isIpad ? 115 : 58
 });
@@ -78,6 +78,24 @@ var tweeterButton = Ti.UI.createButton({
 });
 viewInfo.add(tweeterButton);
 tweeterButton.addEventListener('click', openTwitterSite);
+
+//credits
+var boomarLogo = Ti.UI.createImageView({
+	image:IMAGE_PATH+'info/boomar_logo.png',
+	bottom:isIpad ? 34 : 14,
+	right:isIpad ? 117 : 27
+});
+viewInfo.add(boomarLogo);
+
+var creditsLabel = Ti.UI.createLabel({
+	text:'Design & Development by',
+	color:'5c5d5f',
+	textAlign:'center',
+	left:isIpad ? 108 : 23,
+	bottom:isIpad ? 43 : 18,
+	font:{fontSize:isIpad ? 24 : 12, fontWeight:'bold'}
+});
+viewInfo.add(creditsLabel);
 
 //send mail function
 function sendMail(){
