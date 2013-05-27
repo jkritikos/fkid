@@ -86,6 +86,7 @@ var boomarLogo = Ti.UI.createImageView({
 	right:isIpad ? 117 : 27
 });
 viewInfo.add(boomarLogo);
+boomarLogo.addEventListener('click', openBoomarSite);
 
 var creditsLabel = Ti.UI.createLabel({
 	text:'Design & Development by',
@@ -96,6 +97,7 @@ var creditsLabel = Ti.UI.createLabel({
 	font:{fontSize:isIpad ? 24 : 12, fontWeight:'bold'}
 });
 viewInfo.add(creditsLabel);
+creditsLabel.addEventListener('click', openBoomarSite);
 
 //send mail function
 function sendMail(){
@@ -115,6 +117,10 @@ function openFacebookSite(){
 
 function openTwitterSite(){
 	Titanium.Platform.openURL('http://www.twitter.com/ifeelkid');
+}
+
+function openBoomarSite(){
+	Titanium.Platform.openURL('http://www.boomar.gr');
 }
 
 function handleInfoButton(){
