@@ -152,6 +152,7 @@ function audioPlayerState(e){
 //handles info button and directs to info.js
 function handlePlayerInfoButton(){
 	playerTabSelected.hide();
+	activeTab = null;
 	
 	viewPlayer.animate(anim_out);
 	viewInfo.animate(anim_in);
