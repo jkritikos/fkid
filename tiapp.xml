@@ -14,16 +14,16 @@
         <target device="blackberry">false</target>
     </deployment-targets>
     <sdk-version>2.1.3.GA</sdk-version>
-    <id>com.veladia.testing</id>
+    <id>gr.roboras.ifeelkid</id>
     <name>iFeelKid</name>
     <version>1.0</version>
-    <publisher>velerofont</publisher>
+    <publisher>iFeelKid</publisher>
     <url>http://</url>
     <description>not specified</description>
-    <copyright>2013 by velerofont</copyright>
+    <copyright>2013 by iFeelKid</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
-    <prerendered-icon>false</prerendered-icon>
+    <prerendered-icon>true</prerendered-icon>
     <statusbar-style>default</statusbar-style>
     <statusbar-hidden>true</statusbar-hidden>
     <fullscreen>true</fullscreen>
