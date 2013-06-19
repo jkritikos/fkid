@@ -7,7 +7,7 @@ var cardSelectionListContainer = null;
 //Creates the card that acts as a store (e.g. buy more)
 function createStoreCard(){
 	var storeCardView = Ti.UI.createView({
-		top:isIpad ? 60 : 30
+		top:isIpad ? 60 : IPHONE5? 42 : 30
 	});
 	
 	var storeCard = Ti.UI.createImageView({
@@ -17,7 +17,7 @@ function createStoreCard(){
 	var imgRestore = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/store/cloud_restore.png',
 		left:isIpad ? 155 : 50,
-		bottom:isIpad ? 40 : 20,
+		bottom:isIpad ? 40 : IPHONE5? 50 : 20,
 		zIndex:2,
 		width:isIpad? 223 :106,
 		height:isIpad? 146: 70
@@ -26,7 +26,7 @@ function createStoreCard(){
 	var imgBuy = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/store/cloud_price.png',
 		right:isIpad ? 155 : 50,
-		bottom:isIpad ? 40 : 20,
+		bottom:isIpad ? 40 : IPHONE5? 50 : 20,
 		zIndex:2,
 		width:isIpad? 223 :106,
 		height:isIpad? 146: 70
@@ -102,7 +102,7 @@ function createCardViews(){
 function createCardSelectionList(){
 	var CARD_SELECTION_OFFSET_X = isIpad? 176: 79;
 	var CARD_SELECTION_OFFSET_Y = isIpad? 228 : 105;
-	var LIST_TOP = isIpad? 150 : 70;
+	var LIST_TOP = isIpad? 150 : IPHONE5? 100 : 70;
 	
 	cardSelectionListContainer = Ti.UI.createView({
 		top:LIST_TOP

@@ -2,7 +2,7 @@
 var url = 'http://www.ifeelkid.gr/program/';
 
 //global var indicates whether any purchases have been made
-var purchasedPack = true;
+var purchasedPack = false;
 
 //Labels
 var MSG_NO_INTERNET = 'Φαίνεται να μην είσαι συνδεδεμένος στο Internet.. Συνδέσου και δοκίμασε ξανά!';
