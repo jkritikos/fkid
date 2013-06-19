@@ -172,8 +172,8 @@ function populateTableView(data){
 				left:isIpad ? -6 : -4,
 				width:isIpad ? 235 : 114,
 				height:isIpad ? 57 : 35,
-				borderColor:color,
-				borderRadius:isIpad ? 6 : 4
+				borderColor:color
+				//borderRadius:isIpad ? 6 : 4
 			});
 			
 			

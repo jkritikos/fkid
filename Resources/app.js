@@ -54,7 +54,8 @@ anim_out.duration = 250;
 
 //create window
 var win = Titanium.UI.createWindow({
-	fullscreen:true
+	fullscreen:true,
+	orientationModes:[Ti.UI.PORTRAIT, Ti.UI.UPSIDE_PORTRAIT]
 });
 
 //included all files 
