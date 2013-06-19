@@ -4,6 +4,21 @@ var cardImageTop = IPHONE5 ? 73+CARDS_IPHONE5_OFFSET_HEIGHT : 73;
 
 var cardSelectionListContainer = null;
 
+//Updates the UI after a purchase is completed
+function updateUIAfterPurchase(){
+	Ti.API.info('updateUIAfterPurchase() called');
+	purchasedPack = true;
+	
+	cardSrollableView.opacity = 0;
+	
+	//recreate the scrollable list so that the purchased cards are visible
+	var cardViews = createCardViews();
+	cardSrollableView.setViews(cardViews);
+	
+	
+	createCardSelectionList(true);
+}
+
 //Creates the card that acts as a store (e.g. buy more)
 function createStoreCard(){
 	var storeCardView = Ti.UI.createView({
@@ -35,6 +50,9 @@ function createStoreCard(){
 	storeCardView.add(imgRestore);
 	storeCardView.add(imgBuy);
 	storeCardView.add(storeCard);
+	
+	imgRestore.addEventListener('click', updateUIAfterPurchase);
+	imgBuy.addEventListener('click', updateUIAfterPurchase);
 	
 	return storeCardView;
 }
@@ -99,13 +117,14 @@ function createCardViews(){
 }
 
 /*Creates the card selection (1-10, 11-20 etc) - available only after purchases are made*/
-function createCardSelectionList(){
+function createCardSelectionList(afterPurchase){
 	var CARD_SELECTION_OFFSET_X = isIpad? 176: 79;
 	var CARD_SELECTION_OFFSET_Y = isIpad? 228 : 105;
 	var LIST_TOP = isIpad? 150 : IPHONE5? 100 : 70;
 	
 	cardSelectionListContainer = Ti.UI.createView({
-		top:LIST_TOP
+		top:LIST_TOP,
+		opacity:0
 	});
 	
 	var cardListButton1 = Ti.UI.createButton({
@@ -244,11 +263,16 @@ function createCardSelectionList(){
 	cardListButton12.addEventListener('click', handleCardSelection);
 	
 	viewCards.add(cardSelectionListContainer);
+	if(afterPurchase){
+		cardSelectionListContainer.animate(anim_in);
+	} else {
+		cardSelectionListContainer.opacity = 1;
+	}
 }
 
 //Event handler for the cards scroll event
 function handleCardScroll(e){
-	//Ti.API.info('SCROLL EVENT');
+	Ti.API.info('SCROLL EVENT, purchasedPack='+purchasedPack);
 	
 	var cardIndex = (e.currentPage+1);
 	
@@ -379,7 +403,7 @@ cardHomeButton.addEventListener('click', handleCardHomeButton);
 
 //Show tha card selection list, if any purchases have been made
 if(purchasedPack){
-	createCardSelectionList();
+	createCardSelectionList(false);
 } else {
 	cardSrollableView.opacity = 1;
 }
