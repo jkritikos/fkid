@@ -41,7 +41,7 @@ function destroyAudioPlayer(){
 var viewPlayer = Ti.UI.createView({
 	backgroundImage:IMAGE_PATH+'player/background.jpg',
 	bottom:isIpad ? 146 : 65,
-	opacity:0
+	opacity:1
 });
 
 //play button

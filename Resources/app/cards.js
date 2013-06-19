@@ -4,6 +4,41 @@ var cardImageTop = IPHONE5 ? 73+CARDS_IPHONE5_OFFSET_HEIGHT : 73;
 
 var cardSelectionListContainer = null;
 
+//Creates the card that acts as a store (e.g. buy more)
+function createStoreCard(){
+	var storeCardView = Ti.UI.createView({
+		top:isIpad ? 60 : 30
+	});
+	
+	var storeCard = Ti.UI.createImageView({
+		image:IMAGE_PATH+'card/store/card_buymore.png',
+	});
+	
+	var imgRestore = Ti.UI.createButton({
+		backgroundImage:IMAGE_PATH+'card/store/cloud_restore.png',
+		left:isIpad ? 155 : 50,
+		bottom:isIpad ? 40 : 20,
+		zIndex:2,
+		width:isIpad? 223 :106,
+		height:isIpad? 146: 70
+	});
+	
+	var imgBuy = Ti.UI.createButton({
+		backgroundImage:IMAGE_PATH+'card/store/cloud_price.png',
+		right:isIpad ? 155 : 50,
+		bottom:isIpad ? 40 : 20,
+		zIndex:2,
+		width:isIpad? 223 :106,
+		height:isIpad? 146: 70
+	});
+	
+	storeCardView.add(imgRestore);
+	storeCardView.add(imgBuy);
+	storeCardView.add(storeCard);
+	
+	return storeCardView;
+}
+
 /*Returns an array with the image views for all the cards available to the app.
  Checks if any purchases have been made and performs accordingly*/
 function createCardViews(){
@@ -14,11 +49,12 @@ function createCardViews(){
 	var homeButton = null;
 	
 	//create arrow images
+	/*
 	var cardArrowRight = Ti.UI.createImageView({
 		image:IMAGE_PATH+'card/arrow-right.png',
 		right:2,
 		zIndex:10
-	});
+	});*/
 	
 	//If there are no purchases, just add the demo cards
 	if(!purchasedPack){
@@ -31,10 +67,25 @@ function createCardViews(){
 			
 			cardViews.push(tmpCard);
 		}
+		
+		//Also add the STORE card
+		cardViews.push(createStoreCard());
+		
 	} else {
 		
-		//create cards
-		for(var i=1; i <= 110; i++){
+		//create demo cards
+		for(var i=1; i <= 10; i++){
+			
+			tmpCard = Ti.UI.createImageView({
+				image:IMAGE_PATH+'card/demo/demo'+i+'.png',
+				top:isIpad ? 155 : cardImageTop
+			});
+			
+			cardViews.push(tmpCard);
+		}
+		
+		//create cards for PACK1
+		for(var i=1; i <= 100; i++){
 			tmpCard = Ti.UI.createImageView({
 				image:IMAGE_PATH+'card/pack1_gr/'+i+'.png',
 				top:isIpad ? 155 : cardImageTop
@@ -49,9 +100,9 @@ function createCardViews(){
 
 /*Creates the card selection (1-10, 11-20 etc) - available only after purchases are made*/
 function createCardSelectionList(){
-	var CARD_SELECTION_OFFSET_X = 79;
-	var CARD_SELECTION_OFFSET_Y = 105;
-	var LIST_TOP = 70;
+	var CARD_SELECTION_OFFSET_X = isIpad? 176: 79;
+	var CARD_SELECTION_OFFSET_Y = isIpad? 228 : 105;
+	var LIST_TOP = isIpad? 150 : 70;
 	
 	cardSelectionListContainer = Ti.UI.createView({
 		top:LIST_TOP
@@ -59,17 +110,17 @@ function createCardSelectionList(){
 	
 	var cardListButton1 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/demo.png',
-		width:78,
-		height:100,
-		left:3,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
+		left:isIpad? 30 : 3,
 		top:5,
 		cardIndex:1
 	});
 	
 	var cardListButton2 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/1-10.png',
-		width:78,
-		height:100,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
 		left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
 		top:5,
 		cardIndex:11
@@ -77,8 +128,8 @@ function createCardSelectionList(){
 	
 	var cardListButton3 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/11-20.png',
-		width:78,
-		height:100,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
 		left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
 		top:5,
 		cardIndex:21
@@ -86,8 +137,8 @@ function createCardSelectionList(){
 	
 	var cardListButton4 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/21-30.png',
-		width:78,
-		height:100,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
 		left:cardListButton3.left+CARD_SELECTION_OFFSET_X,
 		top:5,
 		cardIndex:31
@@ -96,17 +147,17 @@ function createCardSelectionList(){
 	//row2
 	var cardListButton5 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/31-40.png',
-		width:78,
-		height:100,
-		left:3,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
+		left:isIpad? 30 : 3,
 		top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
 		cardIndex:41
 	});
 	
 	var cardListButton6 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/41-50.png',
-		width:78,
-		height:100,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
 		left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
 		top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
 		cardIndex:51
@@ -114,8 +165,8 @@ function createCardSelectionList(){
 	
 	var cardListButton7 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/51-60.png',
-		width:78,
-		height:100,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
 		left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
 		top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
 		cardIndex:61
@@ -123,8 +174,8 @@ function createCardSelectionList(){
 	
 	var cardListButton8 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/61-70.png',
-		width:78,
-		height:100,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
 		left:cardListButton3.left+CARD_SELECTION_OFFSET_X,
 		top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
 		cardIndex:71
@@ -133,17 +184,17 @@ function createCardSelectionList(){
 	//row3
 	var cardListButton9 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/71-80.png',
-		width:78,
-		height:100,
-		left:3,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
+		left:isIpad? 30 : 3,
 		top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
 		cardIndex:81
 	});
 	
 	var cardListButton10 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/81-90.png',
-		width:78,
-		height:100,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
 		left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
 		top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
 		cardIndex:91
@@ -151,8 +202,8 @@ function createCardSelectionList(){
 	
 	var cardListButton11 = Ti.UI.createButton({
 		backgroundImage:IMAGE_PATH+'card/selection/91-100.png',
-		width:78,
-		height:100,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
 		left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
 		top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
 		cardIndex:101
@@ -160,8 +211,8 @@ function createCardSelectionList(){
 	
 	var cardListButton12 = Ti.UI.createImageView({
 		image:IMAGE_PATH+'card/selection/more-soon.png',
-		width:78,
-		height:100,
+		width:isIpad? 175 : 78,
+		height:isIpad? 223 : 100,
 		left:cardListButton3.left+CARD_SELECTION_OFFSET_X,
 		top:cardListButton5.top+CARD_SELECTION_OFFSET_Y
 	});
@@ -204,7 +255,11 @@ function handleCardScroll(e){
 	if(cardIndex <= 10){
 		cardIndexLabel.hide();
 	} else {
-		cardIndexLabel.show();
+		
+		if(purchasedPack){
+			cardIndexLabel.show();
+		}
+		
 	}
 	
 	//subtract the demo cards to align the numbering
@@ -227,7 +282,10 @@ function handleCardSelection(e){
 			//subtract the demo cards to align the numbering
 			var cardIndex = (scrollToIndex+1) -10;
 			cardIndexLabel.text = cardIndex;
-			cardIndexLabel.show();
+			
+			if(purchasedPack){
+				cardIndexLabel.show();
+			}
 		}
 	
 		//show the home button
@@ -235,7 +293,7 @@ function handleCardSelection(e){
 		
 		//show the cards
 		cardSelectionListContainer.opacity = 0;
-		cardSrollableView.opacity = 1;
+		cardSrollableView.animate(anim_in);
 	}
 }
 
@@ -244,8 +302,8 @@ function handleCardHomeButton(){
 	cardHomeButton.hide();
 	cardIndexLabel.hide();
 	
-	cardSelectionListContainer.opacity = 1;
 	cardSrollableView.opacity = 0;
+	cardSelectionListContainer.animate(anim_in);
 }
 
 //cards view
@@ -289,7 +347,7 @@ var cardIndexLabel = Ti.UI.createLabel({
 	text:'1',
 	font:{fontSize:isIpad ? 68 : 27, fontWeight:'bold', fontFamily:'Aka-AcidGR-Collage'},
 	zIndex:20,
-	right:8,
+	right:isIpad ? 16:8,
 	top:5,
 	visible:false
 });
@@ -297,14 +355,13 @@ var cardIndexLabel = Ti.UI.createLabel({
 //Card home button
 var cardHomeButton = Ti.UI.createButton({
 	backgroundImage:IMAGE_PATH+'card/home.png',
-	width:58,
-	height:54,
+	width:isIpad? 132:58,
+	height:isIpad? 122:54,
 	visible:false,
 	top:0,
 	left:0,
 	zIndex:20,
-})
-
+});
 
 //Build cards and scrollable view
 var cardViews = createCardViews();
@@ -324,6 +381,6 @@ cardHomeButton.addEventListener('click', handleCardHomeButton);
 if(purchasedPack){
 	createCardSelectionList();
 } else {
-	
+	cardSrollableView.opacity = 1;
 }
 

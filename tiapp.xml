@@ -24,13 +24,13 @@
     <copyright>2013 by velerofont</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
-    <prerendered-icon>false</prerendered-icon>
+    <prerendered-icon>true</prerendered-icon>
     <statusbar-style>default</statusbar-style>
     <statusbar-hidden>true</statusbar-hidden>
     <fullscreen>true</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>false</analytics>
-    <guid>2115470c-c293-4d42-bb09-0ff8632fa1da</guid>
+    <guid>32d6796a-d8a3-4702-a36f-27c36a510daa</guid>
     <property name="ti.ui.defaultunit">system</property>
     <iphone>
         <backgroundModes>
@@ -54,5 +54,7 @@
         </splash>
         <theme>default</theme>
     </mobileweb>
-    <modules/>
+    <modules>
+        <module platform="iphone">ti.storekit</module>
+    </modules>
 </ti:app>

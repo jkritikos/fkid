@@ -65,7 +65,7 @@ Ti.include('app/cards.js');
 Ti.include('app/player.js');
 Ti.include('app/info.js');
 
-viewPlayer.animate(anim_in);
+//viewPlayer.animate(anim_in);
 
 var tableShown = false;
 
