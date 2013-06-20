@@ -15,13 +15,13 @@
         <target device="blackberry">false</target>
     </deployment-targets>
     <sdk-version>3.1.1.GA</sdk-version>
-    <id>com.veladia.testing</id>
+    <id>gr.roboras.ifeelkid</id>
     <name>iFeelKid</name>
     <version>1.0</version>
-    <publisher>velerofont</publisher>
-    <url>http://</url>
+    <publisher>Boomar</publisher>
+    <url>http://www.boomar.gr</url>
     <description>not specified</description>
-    <copyright>2013 by velerofont</copyright>
+    <copyright>2013 by ifeelkid</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>true</prerendered-icon>

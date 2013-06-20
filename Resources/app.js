@@ -2,13 +2,21 @@
 var url = 'http://www.ifeelkid.gr/program/';
 
 //global var indicates whether any purchases have been made
-var purchasedPack = false;
+//var purchasedPack = false;
 
 //Labels
 var MSG_NO_INTERNET = 'Φαίνεται να μην είσαι συνδεδεμένος στο Internet.. Συνδέσου και δοκίμασε ξανά!';
 var SCHEDULE_TITLE = 'loading...';
 var INFO_TITLE = 'Βρείτε μας';
 var CARDS_TITLE = 'Ήξερες ότι..';
+var STORE_MSG_PURCHASE_CANCELLED = 'Η αγορά σας ακυρώθηκε.';
+var STORE_MSG_THANKS_FOR_PURCHASE = 'Ευχαριστούμε για την αγορά σας!';
+var STORE_MSG_NOTHING_TO_RESTORE = 'Δεν βρέθηκαν αγορές για επαναφορά.';
+
+//STORE Error codes
+var STORE_ERROR_COMMS = 'Σφάλμα: Η επικοινωνία με την Apple απέτυχε.';
+var STORE_ERROR_INVALID_PRODUCT = 'Σφάλμα: Λάθος προϊόν.';
+var STORE_ERROR_GENERAL_FAILURE = 'Σφάλμα: Η αγορά σας απέτυχε. '; //me keno sto telos
 
 var tableShown = false;
 var SERVER_TIMEOUT = 20000;
@@ -59,14 +67,12 @@ var win = Titanium.UI.createWindow({
 });
 
 //included all files 
+Ti.include('app/store.js');
 Ti.include('app/server.js');
-
 Ti.include('app/schedule.js');
 Ti.include('app/cards.js');
 Ti.include('app/player.js');
 Ti.include('app/info.js');
-
-//viewPlayer.animate(anim_in);
 
 var tableShown = false;
 

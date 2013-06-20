@@ -15,8 +15,32 @@ function updateUIAfterPurchase(){
 	var cardViews = createCardViews();
 	cardSrollableView.setViews(cardViews);
 	
-	
 	createCardSelectionList(true);
+}
+
+//Evenet handler for the restore purchases button
+function handleRestorePurchases(){
+	if(Titanium.Network.online == true){
+		restorePurchases();
+	} else {
+		alert(MSG_NO_INTERNET);	
+	}
+}
+
+//Event handler for the purchase product button
+function handleProductPurchase(){
+	if(Titanium.Network.online == true){
+		
+		var productObject = requestProduct(kidProduct, function(product){
+			var productTitle = product.title;
+			var productPrice = product.formattedPrice;
+	
+			purchaseProduct(product);
+		});
+		
+	} else {
+		alert(MSG_NO_INTERNET);
+	}
 }
 
 //Creates the card that acts as a store (e.g. buy more)
@@ -51,8 +75,8 @@ function createStoreCard(){
 	storeCardView.add(imgBuy);
 	storeCardView.add(storeCard);
 	
-	imgRestore.addEventListener('click', updateUIAfterPurchase);
-	imgBuy.addEventListener('click', updateUIAfterPurchase);
+	imgRestore.addEventListener('click', handleRestorePurchases);
+	imgBuy.addEventListener('click', handleProductPurchase);
 	
 	return storeCardView;
 }
