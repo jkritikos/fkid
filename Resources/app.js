@@ -1,3 +1,5 @@
+Ti.API.info('debug 1');
+
 //url
 var url = 'http://www.ifeelkid.gr/program/';
 

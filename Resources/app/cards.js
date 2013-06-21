@@ -144,121 +144,238 @@ function createCardViews(){
 function createCardSelectionList(afterPurchase){
 	var CARD_SELECTION_OFFSET_X = isIpad? 176: 79;
 	var CARD_SELECTION_OFFSET_Y = isIpad? 228 : 105;
-	var LIST_TOP = isIpad? 150 : IPHONE5? 100 : 70;
+	var LIST_TOP = isIpad? 150 : IPHONE5? 30 : 70;
 	
 	cardSelectionListContainer = Ti.UI.createView({
 		top:LIST_TOP,
 		opacity:0
 	});
 	
-	var cardListButton1 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/demo.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:isIpad? 30 : 3,
-		top:5,
-		cardIndex:1
-	});
+	if(!IPHONE5){
+		var cardListButton1 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/demo.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:isIpad? 30 : 3,
+			top:5,
+			cardIndex:1
+		});
 	
-	var cardListButton2 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/1-10.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
-		top:5,
-		cardIndex:11
-	});
+		var cardListButton2 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/1-10.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
+			top:5,
+			cardIndex:11
+		});
+		
+		var cardListButton3 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/11-20.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
+			top:5,
+			cardIndex:21
+		});
 	
-	var cardListButton3 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/11-20.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
-		top:5,
-		cardIndex:21
-	});
+		var cardListButton4 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/21-30.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton3.left+CARD_SELECTION_OFFSET_X,
+			top:5,
+			cardIndex:31
+		});
+		
+		//row2
+		var cardListButton5 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/31-40.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:isIpad? 30 : 3,
+			top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:41
+		});
+		
+		var cardListButton6 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/41-50.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:51
+		});
+		
+		var cardListButton7 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/51-60.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:61
+		});
+		
+		var cardListButton8 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/61-70.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton3.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:71
+		});
 	
-	var cardListButton4 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/21-30.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:cardListButton3.left+CARD_SELECTION_OFFSET_X,
-		top:5,
-		cardIndex:31
-	});
+		//row3
+		var cardListButton9 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/71-80.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:isIpad? 30 : 3,
+			top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:81
+		});
+		
+		var cardListButton10 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/81-90.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:91
+		});
+		
+		var cardListButton11 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/91-100.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:101
+		});
+		
+		var cardListButton12 = Ti.UI.createImageView({
+			image:IMAGE_PATH+'card/selection/more-soon.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton3.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton5.top+CARD_SELECTION_OFFSET_Y
+		});
+	} else {
+		
+		//row1
+		var cardListButton1 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/demo.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:isIpad? 30 : 3,
+			top:5,
+			cardIndex:1
+		});
 	
-	//row2
-	var cardListButton5 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/31-40.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:isIpad? 30 : 3,
-		top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
-		cardIndex:41
-	});
+		var cardListButton2 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/1-10.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
+			top:5,
+			cardIndex:11
+		});
+		
+		var cardListButton3 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/11-20.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
+			top:5,
+			cardIndex:21
+		});
+		
+		//iphone5 row2
+		var cardListButton4 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/21-30.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:isIpad? 30 : 3,
+			top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:31
+		});
 	
-	var cardListButton6 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/41-50.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
-		top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
-		cardIndex:51
-	});
+		var cardListButton5 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/31-40.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton4.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:41
+		});
+		
+		var cardListButton6 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/41-50.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton5.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:51
+		});
 	
-	var cardListButton7 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/51-60.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
-		top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
-		cardIndex:61
-	});
+		//iphone5 row3
+		var cardListButton7 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/51-60.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:isIpad? 30 : 3,
+			top:cardListButton4.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:61
+		});
+		
+		var cardListButton8 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/61-70.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton7.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton4.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:71
+		});
+		
+		var cardListButton9 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/71-80.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton8.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton4.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:81
+		});
 	
-	var cardListButton8 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/61-70.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:cardListButton3.left+CARD_SELECTION_OFFSET_X,
-		top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
-		cardIndex:71
-	});
+		//row4
+		var cardListButton10 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/81-90.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:isIpad? 30 : 3,
+			top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:91
+		});
+		
+		var cardListButton11 = Ti.UI.createButton({
+			backgroundImage:IMAGE_PATH+'card/selection/91-100.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton10.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton7.top+CARD_SELECTION_OFFSET_Y,
+			cardIndex:101
+		});
+		
+		var cardListButton12 = Ti.UI.createImageView({
+			image:IMAGE_PATH+'card/selection/more-soon.png',
+			width:isIpad? 175 : 78,
+			height:isIpad? 223 : 100,
+			left:cardListButton11.left+CARD_SELECTION_OFFSET_X,
+			top:cardListButton7.top+CARD_SELECTION_OFFSET_Y
+		});
+		
+	}
 	
-	//row3
-	var cardListButton9 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/71-80.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:isIpad? 30 : 3,
-		top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
-		cardIndex:81
-	});
 	
-	var cardListButton10 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/81-90.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:cardListButton1.left+CARD_SELECTION_OFFSET_X,
-		top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
-		cardIndex:91
-	});
-	
-	var cardListButton11 = Ti.UI.createButton({
-		backgroundImage:IMAGE_PATH+'card/selection/91-100.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:cardListButton2.left+CARD_SELECTION_OFFSET_X,
-		top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
-		cardIndex:101
-	});
-	
-	var cardListButton12 = Ti.UI.createImageView({
-		image:IMAGE_PATH+'card/selection/more-soon.png',
-		width:isIpad? 175 : 78,
-		height:isIpad? 223 : 100,
-		left:cardListButton3.left+CARD_SELECTION_OFFSET_X,
-		top:cardListButton5.top+CARD_SELECTION_OFFSET_Y
-	});
 	
 	cardSelectionListContainer.add(cardListButton1);
 	cardSelectionListContainer.add(cardListButton2);
