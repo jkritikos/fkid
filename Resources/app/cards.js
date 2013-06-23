@@ -142,9 +142,9 @@ function createCardViews(){
 
 /*Creates the card selection (1-10, 11-20 etc) - available only after purchases are made*/
 function createCardSelectionList(afterPurchase){
-	var CARD_SELECTION_OFFSET_X = isIpad? 176: 79;
+	var CARD_SELECTION_OFFSET_X = isIpad? 176: IPHONE5? 98 : 79;
 	var CARD_SELECTION_OFFSET_Y = isIpad? 228 : 105;
-	var LIST_TOP = isIpad? 150 : IPHONE5? 30 : 70;
+	var LIST_TOP = isIpad? 150 : IPHONE5? 60 : 70;
 	
 	cardSelectionListContainer = Ti.UI.createView({
 		top:LIST_TOP,
@@ -267,7 +267,7 @@ function createCardSelectionList(afterPurchase){
 			backgroundImage:IMAGE_PATH+'card/selection/demo.png',
 			width:isIpad? 175 : 78,
 			height:isIpad? 223 : 100,
-			left:isIpad? 30 : 3,
+			left:isIpad? 30 : 24,
 			top:5,
 			cardIndex:1
 		});
@@ -295,7 +295,7 @@ function createCardSelectionList(afterPurchase){
 			backgroundImage:IMAGE_PATH+'card/selection/21-30.png',
 			width:isIpad? 175 : 78,
 			height:isIpad? 223 : 100,
-			left:isIpad? 30 : 3,
+			left:isIpad? 30 : 24,
 			top:cardListButton1.top+CARD_SELECTION_OFFSET_Y,
 			cardIndex:31
 		});
@@ -323,7 +323,7 @@ function createCardSelectionList(afterPurchase){
 			backgroundImage:IMAGE_PATH+'card/selection/51-60.png',
 			width:isIpad? 175 : 78,
 			height:isIpad? 223 : 100,
-			left:isIpad? 30 : 3,
+			left:isIpad? 30 : 24,
 			top:cardListButton4.top+CARD_SELECTION_OFFSET_Y,
 			cardIndex:61
 		});
@@ -351,8 +351,8 @@ function createCardSelectionList(afterPurchase){
 			backgroundImage:IMAGE_PATH+'card/selection/81-90.png',
 			width:isIpad? 175 : 78,
 			height:isIpad? 223 : 100,
-			left:isIpad? 30 : 3,
-			top:cardListButton5.top+CARD_SELECTION_OFFSET_Y,
+			left:isIpad? 30 : 24,
+			top:cardListButton7.top+CARD_SELECTION_OFFSET_Y,
 			cardIndex:91
 		});
 		
